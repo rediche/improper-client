@@ -28,7 +28,7 @@ import {
 // These are the elements needed by this element.
 import './snack-bar.js';
 
-class MyApp extends connect(store)(LitElement) {
+class ImproperClient extends connect(store)(LitElement) {
   static get properties() {
     return {
       appTitle: { type: String },
@@ -147,4 +147,4 @@ class MyApp extends connect(store)(LitElement) {
   }
 }
 
-window.customElements.define('my-app', MyApp);
+window.customElements.define('improper-client', ImproperClient);
