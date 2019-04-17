@@ -112,10 +112,6 @@ class ImproperClient extends connect(store)(LitElement) {
         <my-view404 class="page" ?active="${this._page === 'view404'}"></my-view404>
       </main>
 
-      <footer>
-        <p>Made with &hearts; by the Polymer team.</p>
-      </footer>
-
       <snack-bar ?active="${this._snackbarOpened}">
         You are now ${this._offline ? 'offline' : 'online'}.
       </snack-bar>
