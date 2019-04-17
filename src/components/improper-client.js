@@ -131,7 +131,7 @@ class ImproperClient extends connect(store)(LitElement) {
 
   updated(changedProps) {
     if (changedProps.has('_page')) {
-      const pageTitle = this.appTitle + ' - ' + this._page;
+      const pageTitle = `${this._page} - ${this.appTitle}`;
       updateMetadata({
         title: pageTitle,
         description: pageTitle
