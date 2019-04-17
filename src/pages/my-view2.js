@@ -9,7 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 */
 
 import { html } from 'lit-element';
-import { PageViewElement } from './page-view-element.js';
+import { PageViewElement } from '../components/page-view-element.js';
 import { connect } from 'pwa-helpers/connect-mixin.js';
 
 // This element is connected to the Redux store.
@@ -25,10 +25,10 @@ store.addReducers({
 });
 
 // These are the elements needed by this element.
-import './counter-element.js';
+import '../components/counter-element.js';
 
 // These are the shared styles needed by this element.
-import { SharedStyles } from './shared-styles.js';
+import { SharedStyles } from '../styles/shared-styles.js';
 
 class MyView2 extends connect(store)(PageViewElement) {
   static get properties() {
