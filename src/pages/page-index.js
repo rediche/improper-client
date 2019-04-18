@@ -87,7 +87,7 @@ class PageIndex extends PageViewElement {
   
         <div class="form">
           <input type="text" maxlength="6" placeholder="Enter game code" @input="${this._changeGameCode}">
-          <button type="button" ?disabled="${!this.gameCode}" @click="${this._joinGame}">Join game</a>
+          <button type="button" ?disabled="${this.gameCode.length !== 6}" @click="${this._joinGame}">Join game</a>
           <button type="button" class="transparent">Create a new game</button>
         </div>
   
