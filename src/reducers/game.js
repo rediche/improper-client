@@ -25,6 +25,7 @@ const INITIAL_STATE = {
   state: GAME_STATES.PICKING_CARDS,//GAME_STATES.STARTING,
   winner: '',
   selectedCard: null,
+  // TODO: Get cards from server
   cards: [{
     id: 1,
     text: 'A Gypsy curse.'
