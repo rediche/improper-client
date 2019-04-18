@@ -5,4 +5,8 @@ export const SharedStyles = css`
     display: block;
     box-sizing: border-box;
   }
+
+  * {
+    box-sizing: border-box;
+  }
 `;

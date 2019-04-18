@@ -19,11 +19,11 @@ class PageIndex extends PageViewElement {
           margin: 0 auto;
           display: flex;
           flex-direction: column;
+          padding: 24px;
         }
 
         h1 {
-          font-size: 60px;
-          text-align: center;
+          font-size: 60px; 
           margin: auto 0 78px;
         }
 
@@ -41,9 +41,23 @@ class PageIndex extends PageViewElement {
           margin-top: 18px;
         }
 
+        .transparent {
+          display: none;
+        }
+
         p {
           margin-top: auto;
           text-align: center;
+        }
+
+        @media screen and (min-width: 1024px) {
+          h1 {
+            text-align: center;
+          }
+
+          .transparent {
+            display: inline-block;
+          }
         }
       `
     ];
