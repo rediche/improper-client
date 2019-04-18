@@ -1,5 +1,5 @@
 import {
-  UPDATE_GAMECODE,
+  UPDATE_GAME_CODE,
   UPDATE_PLAYER_TYPE,
   UPDATE_GAME_STATE,
   UPDATE_GAME_WINNER
@@ -19,7 +19,7 @@ export const GAME_STATES = {
 }
 
 const INITIAL_STATE = {
-  gameCode: '',
+  code: '',
   playerType: PLAYER_TYPES.PLAYER,
   gameState: GAME_STATES.STARTING,
   winner: ''
@@ -27,10 +27,10 @@ const INITIAL_STATE = {
 
 const game = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case UPDATE_GAMECODE:
+    case UPDATE_GAME_CODE:
       return {
         ...state,
-        gameCode: action.gameCode
+        code: action.code
       };
     case UPDATE_PLAYER_TYPE:
       return {

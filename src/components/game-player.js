@@ -47,8 +47,6 @@ class GamePlayer extends connect(store)(LitElement) {
 
   stateChanged({ game }) {
     this._gameState = game.gameState;
-    /* this._gameCode = game.gameCode;
-    this._playerType = game.playerType; */
   }
 }
 

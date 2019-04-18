@@ -20,7 +20,6 @@ import '../components/game-player.js';
 class PageGame extends connect(store)(PageViewElement) {
   static get properties() {
     return {
-      _gameCode: { type: String },
       _playerType: { type: String }
     };
   }
@@ -50,7 +49,6 @@ class PageGame extends connect(store)(PageViewElement) {
   }
 
   stateChanged({ game }) {
-    this._gameCode = game.gameCode;
     this._playerType = game.playerType;
   }
 }

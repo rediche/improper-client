@@ -28,10 +28,7 @@ class GameHost extends connect(store)(LitElement) {
     return html`<h1>HOST</h1>`;
   }
 
-  stateChanged({ game }) {
-    /* this._gameCode = game.gameCode;
-    this._playerType = game.playerType; */
-  }
+  stateChanged({ game }) {}
 }
 
 window.customElements.define('game-host', GameHost);

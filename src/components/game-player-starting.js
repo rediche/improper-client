@@ -60,9 +60,7 @@ class GamePlayerStarting extends connect(store)(LitElement) {
   }
 
   stateChanged({ game }) {
-    this._gameCode = game.gameCode;
-    /* this._gameCode = game.gameCode;
-    this._playerType = game.playerType; */
+    this._gameCode = game.code;
   }
 }
 
