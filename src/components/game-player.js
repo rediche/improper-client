@@ -33,7 +33,9 @@ class GamePlayer extends connect(store)(LitElement) {
   }
 
   render() {
-    switch (this._gameState) {
+    const { _gameState } = this;
+
+    switch (_gameState) {
       case GAME_STATES.GAME_OVER:
         return html`<game-over></game-over>`;
       case GAME_STATES.PICKING_CARDS:
@@ -46,7 +48,7 @@ class GamePlayer extends connect(store)(LitElement) {
   }
 
   stateChanged({ game }) {
-    this._gameState = game.gameState;
+    this._gameState = game.state;
   }
 }
 

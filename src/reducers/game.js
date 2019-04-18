@@ -21,7 +21,7 @@ export const GAME_STATES = {
 const INITIAL_STATE = {
   code: '',
   playerType: PLAYER_TYPES.PLAYER,
-  gameState: GAME_STATES.STARTING,
+  state: GAME_STATES.STARTING,
   winner: ''
 };
 
@@ -40,7 +40,7 @@ const game = (state = INITIAL_STATE, action) => {
     case UPDATE_GAME_STATE:
       return {
         ...state,
-        gameState: action.gameState
+        state: action.state
       };
     case UPDATE_GAME_WINNER:
       return {
