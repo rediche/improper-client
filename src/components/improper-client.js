@@ -31,15 +31,15 @@ class ImproperClient extends connect(store)(LitElement) {
       css`
         :host {
           display: block;
-          min-height: 100vh;
         }
-
+        
         /* Workaround for IE11 displaying <main> as inline */
         main {
           display: block;
         }
-
+        
         .page {
+          min-height: 100vh;
           display: none;
         }
 
