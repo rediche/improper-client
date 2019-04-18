@@ -62,7 +62,7 @@ class GamePlayerPick extends connect(store)(LitElement) {
       <div class="full-height">
         <h1>Pick a card to play.</h1>
         <div class="cards">
-          ${_cards.map(card => html`<game-card .card="${card}"></game-card>`)}
+          ${_cards.map(card => html`<game-card .selectable="${true}" .card="${card}"></game-card>`)}
         </div>
       </div>
     `;

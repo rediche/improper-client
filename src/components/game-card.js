@@ -2,22 +2,26 @@ import { LitElement, html, css } from 'lit-element';
 
 // These are the shared styles needed by this element.
 import { SharedStyles } from '../styles/shared-styles.js';
+import { ButtonSharedStyles } from '../styles/button-shared-styles.js';
 
 class GameCard extends LitElement {
   static get properties() {
     return {
-      card: { type: Object }
+      card: { type: Object },
+      selectable: { type: Boolean }
     };
   }
 
   constructor() {
     super();
     this.card = {};
+    this.selectable = false;
   }
 
   static get styles() {
     return [
       SharedStyles,
+      ButtonSharedStyles,
       css`
         :host {
           --game-card-border-radius: 16px;
@@ -44,21 +48,41 @@ class GameCard extends LitElement {
           width: 100%;
           height: 100%;
           border-radius: var(--game-card-border-radius);
-          padding: 24px;
           font-size: 32px;
           font-weight: 700;
+          display: flex;
+          flex-direction: column;
+        }
+        
+        .padding {
+          padding: 24px;
+        }
+
+        button {
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+          border-bottom-left-radius: var(--game-card-border-radius);
+          border-bottom-right-radius: var(--game-card-border-radius);
+          margin-top: auto;
+          width: 100%;
         }
       `
     ];
   }
 
   render() {
-    const { card } = this;
+    const { card, selectable } = this;
 
+    // TODO: Button text should be based off an attribute.
+    // Should send event outside of the component.
     return html`
       <div class="ratio">
         <div class="content">
-          <p>${card.text}</p>
+          <div class="padding">
+            <p>${card.text}</p>
+          </div>
+
+          ${ selectable ? html`<button type="button">Pick card</button>` : '' }
         </div>
       </div>
     `;
