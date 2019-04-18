@@ -20,6 +20,8 @@ const updatePlayerType = (playerType) => {
   };
 };
 
+// TODO: Add action that can reset entire game state.
+
 export const updateGameSelectedCard = (selectedCard) => {
   return {
     type: UPDATE_GAME_SELECTED_CARD,
