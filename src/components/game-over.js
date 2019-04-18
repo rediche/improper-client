@@ -8,16 +8,16 @@ import { store } from "../store.js";
 // These are the shared styles needed by this element.
 import { SharedStyles } from '../styles/shared-styles.js';
 
-class GamePlayerStarting extends connect(store)(LitElement) {
+class GameOver extends connect(store)(LitElement) {
   static get properties() {
     return {
-      _gameCode: { type: String }
+      _winner: { type: String }
     };
   }
 
   constructor() {
     super();
-    this._gameCode = '';
+    this._winner = 'test';
   }
 
   static get styles() {
@@ -49,21 +49,19 @@ class GamePlayerStarting extends connect(store)(LitElement) {
   }
 
   render() {
-    const { _gameCode } = this;
+    const { _winner } = this;
 
     return html`
       <div class="full-height">
-        <h1>Waiting for game to start.</h1>
-        <p>Connected to game ${_gameCode.toUpperCase()}</p>
+        <h1>Player ${_winner} wins.</h1>
+        <p>Game Over</p>
       </div>
     `;
   }
 
   stateChanged({ game }) {
-    this._gameCode = game.gameCode;
-    /* this._gameCode = game.gameCode;
-    this._playerType = game.playerType; */
+    this._winner = game.winner;
   }
 }
 
-window.customElements.define('game-player-starting', GamePlayerStarting);
+window.customElements.define('game-over', GameOver);

@@ -11,6 +11,7 @@ import { GAME_STATES } from '../reducers/game.js';
 import { SharedStyles } from '../styles/shared-styles.js';
 
 import './game-player-starting.js';
+import './game-over.js';
 
 class GamePlayer extends connect(store)(LitElement) {
   static get properties() {
@@ -34,7 +35,7 @@ class GamePlayer extends connect(store)(LitElement) {
   render() {
     switch (this._gameState) {
       case GAME_STATES.GAME_OVER:
-        return html`game over`;
+        return html`<game-over></game-over>`;
       case GAME_STATES.PICKING_CARDS:
         return html`picking cards`;
       case GAME_STATES.CHOOSE_WINNER:
