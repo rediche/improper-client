@@ -5,21 +5,30 @@ import { PageViewElement } from '../components/page-view-element.js';
 // This element is connected to the Redux store.
 import { store } from "../store.js";
 
+import { PLAYER_TYPES } from '../reducers/game.js';
+
 // These are the shared styles needed by this element.
 import { SharedStyles } from '../styles/shared-styles.js';
 import { InputSharedStyles } from '../styles/input-shared-styles.js';
 import { ButtonSharedStyles } from '../styles/button-shared-styles.js';
 
+// TODO: Can we load these dynamically?
+// So players don't have to load the host component.
+import '../components/game-host.js';
+import '../components/game-player.js';
+
 class PageGame extends connect(store)(PageViewElement) {
   static get properties() {
     return {
-      _gameCode: { type: String }
+      _gameCode: { type: String },
+      _playerType: { type: String }
     };
   }
 
   constructor() {
     super();
     this._gameCode = '';
+    this._playerType = '';
   }
 
   static get styles() {
@@ -27,19 +36,22 @@ class PageGame extends connect(store)(PageViewElement) {
       SharedStyles,
       InputSharedStyles,
       ButtonSharedStyles,
-      css` 
-      `
+      css``
     ];
   }
 
   render() {
-    return html`
-      GAME
-    `;
+    switch (this._playerType) {
+      case PLAYER_TYPES.HOST:
+        return html`<game-host></game-host>`;
+      default:
+        return html`<game-player></game-player>`;
+    }
   }
 
   stateChanged({ game }) {
-    this._gameCode = game;
+    this._gameCode = game.gameCode;
+    this._playerType = game.playerType;
   }
 }
 

@@ -4,22 +4,22 @@ import {
   UPDATE_GAME_STATE
 } from '../actions/game.js';
 
-const PLAYER_TYPES = {
+export const PLAYER_TYPES = {
   HOST: 'HOST',
-  CLIENT: 'CLIENT'
+  PLAYER: 'PLAYER'
 };
 
 // REPORT: Talk about different states of the game.
-const GAME_STATES = {
+export const GAME_STATES = {
   STARTING: 'STARTING',
-  PICKING_CARDS: 'PICKING_CARDS',
-  CHOOSE_WINNER: 'CHOOSE_WINNER',
+  PICKING_CARDS: 'PICKING_CARDS', // This is the core game loop.
+  CHOOSE_WINNER: 'CHOOSE_WINNER', // This is the core game loop.
   GAME_OVER: 'GAME_OVER'
 }
 
 const INITIAL_STATE = {
   gameCode: '',
-  playerType: PLAYER_TYPES.CLIENT,
+  playerType: PLAYER_TYPES.PLAYER,
   gameState: GAME_STATES.STARTING
 };
 
