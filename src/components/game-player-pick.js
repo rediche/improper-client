@@ -5,6 +5,8 @@ import { PageViewElement } from './page-view-element.js';
 // This element is connected to the Redux store.
 import { store } from "../store.js";
 
+import { updateGameSelectedCard } from '../actions/game.js';
+
 // These are the shared styles needed by this element.
 import { SharedStyles } from '../styles/shared-styles.js';
 
@@ -13,7 +15,8 @@ import './game-card.js';
 class GamePlayerPick extends connect(store)(LitElement) {
   static get properties() {
     return {
-      _cards: { type: Array }
+      _cards: { type: Array },
+      _selectedCard: { type: Number }
     };
   }
 
@@ -45,6 +48,12 @@ class GamePlayerPick extends connect(store)(LitElement) {
           grid-gap: 16px;
         }
 
+        .selected-card {
+          width: 375px;
+          max-width: 100%;
+          margin: auto;
+        }
+
         @media screen and (max-width: 1024px) {
           h1 {
             font-size: 20px;
@@ -56,20 +65,44 @@ class GamePlayerPick extends connect(store)(LitElement) {
 
   // TODO: Add card component.
   render() {
-    const { _cards } = this;
+    const { _selectedCard } = this;
 
     return html`
       <div class="full-height">
-        <h1>Pick a card to play.</h1>
-        <div class="cards">
-          ${_cards.map(card => html`<game-card .selectable="${true}" .card="${card}"></game-card>`)}
-        </div>
+        ${ _selectedCard ? this._renderSelectedCard() : this._renderCardList() }
       </div>
     `;
   }
 
+  _renderSelectedCard() {
+    const { _selectedCard, _cards } = this;
+
+    return html`
+      <h1>Waiting for everyone to pick.</h1>
+      <div class="selected-card">
+        <game-card .card="${_cards.find(card => card.id === _selectedCard)}"></game-card>
+      </div>
+    `;
+  }
+
+  _renderCardList() {
+    const { _cards } = this;
+
+    return html`
+      <h1>Pick a card to play.</h1>
+      <div class="cards">
+        ${_cards.map(card => html`<game-card @card-selected="${this._cardSelected}" .selectable="${true}" .card="${card}"></game-card>`)}
+      </div>
+    `;
+  }
+
+  _cardSelected(event) {
+    store.dispatch(updateGameSelectedCard(event.detail.id));
+  }
+
   stateChanged({ game }) {
     this._cards = game.cards;
+    this._selectedCard = game.selectedCard;
   }
 }
 

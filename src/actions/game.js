@@ -3,6 +3,7 @@ import { navigate } from './app.js';
 export const UPDATE_GAME_CODE = 'UPDATE_GAME_CODE';
 export const UPDATE_GAME_STATE = 'UPDATE_GAME_STATE';
 export const UPDATE_GAME_WINNER = 'UPDATE_GAME_WINNER';
+export const UPDATE_GAME_SELECTED_CARD = 'UPDATE_GAME_SELECTED_CARD';
 export const UPDATE_PLAYER_TYPE = 'UPDATE_PLAYER_TYPE';
 
 export const updateGameCode = (code) => {
@@ -18,3 +19,10 @@ const updatePlayerType = (playerType) => {
     playerType
   };
 };
+
+export const updateGameSelectedCard = (selectedCard) => {
+  return {
+    type: UPDATE_GAME_SELECTED_CARD,
+    selectedCard
+  }
+}

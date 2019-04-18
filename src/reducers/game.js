@@ -2,7 +2,8 @@ import {
   UPDATE_GAME_CODE,
   UPDATE_PLAYER_TYPE,
   UPDATE_GAME_STATE,
-  UPDATE_GAME_WINNER
+  UPDATE_GAME_WINNER,
+  UPDATE_GAME_SELECTED_CARD
 } from '../actions/game.js';
 
 export const PLAYER_TYPES = {
@@ -23,6 +24,7 @@ const INITIAL_STATE = {
   playerType: PLAYER_TYPES.PLAYER,
   state: GAME_STATES.PICKING_CARDS,//GAME_STATES.STARTING,
   winner: '',
+  selectedCard: null,
   cards: [{
     id: 1,
     text: 'A Gypsy curse.'
@@ -77,6 +79,11 @@ const game = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         winner: action.winner
+      };
+    case UPDATE_GAME_SELECTED_CARD:
+      return {
+        ...state,
+        selectedCard: action.selectedCard
       };
     default:
       return state;

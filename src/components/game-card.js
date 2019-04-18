@@ -82,10 +82,20 @@ class GameCard extends LitElement {
             <p>${card.text}</p>
           </div>
 
-          ${ selectable ? html`<button type="button">Pick card</button>` : '' }
+          ${ selectable ? html`<button type="button" @click="${this._selectCard}">Pick card</button>` : '' }
         </div>
       </div>
     `;
+  }
+
+  // REPORT: Talk about private methods and properties
+  _selectCard() {
+    const event = new CustomEvent('card-selected', {
+      detail: {
+        id: this.card.id
+      }
+    });
+    this.dispatchEvent(event);
   }
 }
 
