@@ -8,6 +8,8 @@ import { store } from "../store.js";
 // These are the shared styles needed by this element.
 import { SharedStyles } from '../styles/shared-styles.js';
 
+import './game-card.js';
+
 class GamePlayerPick extends connect(store)(LitElement) {
   static get properties() {
     return {
@@ -29,6 +31,12 @@ class GamePlayerPick extends connect(store)(LitElement) {
           display: flex;
           flex-direction: column;
         }
+
+        .cards {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+          grid-gap: 16px;
+        }
       `
     ];
   }
@@ -40,7 +48,9 @@ class GamePlayerPick extends connect(store)(LitElement) {
     return html`
       <div class="full-height">
         <h1>Pick a card to play.</h1>
-        ${_cards.map(card => html`<div>${card.id} - ${card.text}</div>`)}
+        <div class="cards">
+          ${_cards.map(card => html`<game-card .card="${card}"></game-card>`)}
+        </div>
       </div>
     `;
   }
