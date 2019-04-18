@@ -5,7 +5,7 @@ import { PageViewElement } from "../components/page-view-element.js";
 import { store } from "../store.js";
 
 // These are the actions needed by this element.
-import { navigate } from "../actions/app.js";
+import { navigateToGame } from "../actions/app.js";
 
 // These are the shared styles needed by this element.
 import { SharedStyles } from "../styles/shared-styles.js";
@@ -101,9 +101,7 @@ class PageIndex extends PageViewElement {
   }
 
   _joinGame() {
-    const newLocation = `/game/${this.gameCode}`;
-    window.history.pushState({}, "", newLocation);
-    store.dispatch(navigate(newLocation));
+    store.dispatch(navigateToGame(this.gameCode));
   }
 }
 
