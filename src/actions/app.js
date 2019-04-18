@@ -5,7 +5,7 @@ export const CLOSE_SNACKBAR = 'CLOSE_SNACKBAR';
 
 export const navigate = (path) => (dispatch) => {
   // Extract the page name from path.
-  const page = path === '/' ? 'index' : path.slice(1);
+  const page = path === '/' ? 'index' : path.split('/')[1];
 
   // Any other info you might want to extract from the path (like page type),
   // you can do here
@@ -20,11 +20,8 @@ const loadPage = (page) => (dispatch) => {
         // navigating to view1 after my-view1.js is loaded.
       });
       break;
-    case 'view2':
-      import('../pages/my-view2.js');
-      break;
-    case 'view3':
-      import('../pages/my-view3.js');
+    case 'game':
+      import('../pages/page-game.js');
       break;
     default:
       page = 'view404';

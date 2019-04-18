@@ -55,8 +55,7 @@ class ImproperClient extends connect(store)(LitElement) {
     return html`
       <main role="main" class="main-content">
         <page-index class="page" ?active="${this._page === 'index'}"></page-index>
-        <my-view2 class="page" ?active="${this._page === 'view2'}"></my-view2>
-        <my-view3 class="page" ?active="${this._page === 'view3'}"></my-view3>
+        <page-game class="page" ?active="${this._page === 'game'}"></page-game>
         <my-view404 class="page" ?active="${this._page === 'view404'}"></my-view404>
       </main>
 
