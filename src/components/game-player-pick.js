@@ -30,12 +30,25 @@ class GamePlayerPick extends connect(store)(LitElement) {
           padding: 24px;
           display: flex;
           flex-direction: column;
+          max-width: 1592px;
+          margin: 0 auto;
+        }
+
+        h1 {
+          text-align: center;
+          margin-bottom: 24px;
         }
 
         .cards {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+          grid-template-columns: repeat(auto-fill, minmax(296px, 1fr));
           grid-gap: 16px;
+        }
+
+        @media screen and (max-width: 1024px) {
+          h1 {
+            font-size: 20px;
+          }
         }
       `
     ];
