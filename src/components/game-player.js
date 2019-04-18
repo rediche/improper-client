@@ -5,16 +5,23 @@ import { PageViewElement } from './page-view-element.js';
 // This element is connected to the Redux store.
 import { store } from "../store.js";
 
+import { GAME_STATES } from '../reducers/game.js';
+
 // These are the shared styles needed by this element.
 import { SharedStyles } from '../styles/shared-styles.js';
 
+import './game-player-starting.js';
+
 class GamePlayer extends connect(store)(LitElement) {
   static get properties() {
-    return {};
+    return {
+      _gameState: { type: String }
+    };
   }
 
   constructor() {
     super();
+    this._gameState = '';
   }
 
   static get styles() {
@@ -25,10 +32,20 @@ class GamePlayer extends connect(store)(LitElement) {
   }
 
   render() {
-    return html`PLAYER`;
+    switch (this._gameState) {
+      case GAME_STATES.GAME_OVER:
+        return html`game over`;
+      case GAME_STATES.PICKING_CARDS:
+        return html`picking cards`;
+      case GAME_STATES.CHOOSE_WINNER:
+        return html`choosing winner`;
+      default:
+        return html`<game-player-starting></game-player-starting>`;
+    }
   }
 
   stateChanged({ game }) {
+    this._gameState = game.gameState;
     /* this._gameCode = game.gameCode;
     this._playerType = game.playerType; */
   }
