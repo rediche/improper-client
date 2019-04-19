@@ -76,6 +76,7 @@ class GamePlayerPick extends connect(store)(LitElement) {
   _renderSelectedCard() {
     const { _selectedCard, _cards } = this;
 
+    // TODO: Add text, "Your selected card."
     return html`
       <h1>Waiting for everyone to pick.</h1>
       <div class="selected-card">
@@ -85,12 +86,12 @@ class GamePlayerPick extends connect(store)(LitElement) {
   }
 
   _renderCardList() {
-    const { _cards } = this;
+    const { _cards, _cardSelected } = this;
 
     return html`
       <h1>Pick a card to play.</h1>
       <div class="cards">
-        ${_cards.map(card => html`<game-card @card-selected="${this._cardSelected}" .selectable="${true}" .card="${card}"></game-card>`)}
+        ${_cards.map(card => html`<game-card @card-selected="${_cardSelected}" .selectable="${true}" .card="${card}"></game-card>`)}
       </div>
     `;
   }
