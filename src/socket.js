@@ -7,7 +7,8 @@ import { navigateToGame } from "./actions/app.js";
 import {
   updateGameState,
   updateGameCards,
-  updateGameSelectedCard
+  updateGameSelectedCard,
+  updateGameCzar
 } from "./actions/game.js";
 import { GAME_STATES } from "./reducers/game.js";
 
@@ -22,7 +23,8 @@ socket.on("game-started", () => {
   store.dispatch(updateGameState(GAME_STATES.PICKING_CARDS));
 });
 
-socket.on("new-round", ({ cards, blackCard }) => {
+socket.on("new-round", ({ cards, blackCard, czar }) => {
+  store.dispatch(updateGameCzar(czar));
   store.dispatch(updateGameCards(cards));
 });
 
