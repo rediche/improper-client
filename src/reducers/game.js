@@ -22,7 +22,7 @@ export const GAME_STATES = {
 const INITIAL_STATE = {
   code: '',
   playerType: PLAYER_TYPES.PLAYER,
-  state: GAME_STATES.PICKING_CARDS,//GAME_STATES.STARTING,
+  state: GAME_STATES.STARTING,
   winner: '',
   selectedCard: null,
   cards: [{

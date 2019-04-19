@@ -7,6 +7,9 @@ import { store } from "../store.js";
 // These are the actions needed by this element.
 import { navigateToGame } from "../actions/app.js";
 
+// Load up socket.io
+import { socket } from '../socket.js';
+
 // These are the shared styles needed by this element.
 import { SharedStyles } from "../styles/shared-styles.js";
 import { InputSharedStyles } from "../styles/input-shared-styles.js";
@@ -83,6 +86,7 @@ class PageIndex extends PageViewElement {
 
   render() {
     const { gameCode, _joinGame, _changeGameCode } = this;
+
     return html`
       <div class="wrapper">
         <h1>Improper Cards.</h1>
@@ -103,7 +107,11 @@ class PageIndex extends PageViewElement {
   }
 
   _joinGame() {
-    store.dispatch(navigateToGame(this.gameCode));
+    const { gameCode } = this; 
+    // Emit 'join-game' to socket.
+    socket.emit('join-game', { code: gameCode });
+    // On 'game-joined' dispatch navigateToGame.
+    //store.dispatch(navigateToGame(this.gameCode));
   }
 }
 
