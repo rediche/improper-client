@@ -63,7 +63,6 @@ class GamePlayerPick extends connect(store)(LitElement) {
     ];
   }
 
-  // TODO: Add card component.
   render() {
     const { _selectedCard } = this;
 
