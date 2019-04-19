@@ -12,8 +12,6 @@ import { SharedStyles } from '../styles/shared-styles.js';
 import { InputSharedStyles } from '../styles/input-shared-styles.js';
 import { ButtonSharedStyles } from '../styles/button-shared-styles.js';
 
-// TODO: Can we load these dynamically?
-// So players don't have to load the host component.
 import '../components/game-host.js';
 import '../components/game-player.js';
 

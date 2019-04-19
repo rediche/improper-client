@@ -83,7 +83,6 @@ class PageIndex extends PageViewElement {
 
   render() {
     const { gameCode, _joinGame, _changeGameCode } = this;
-    // TODO: Add keyup:enter event on input field to join game.
     return html`
       <div class="wrapper">
         <h1>Improper Cards.</h1>

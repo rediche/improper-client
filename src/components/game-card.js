@@ -73,8 +73,6 @@ class GameCard extends LitElement {
   render() {
     const { card, selectable } = this;
 
-    // TODO: Button text should be based off an attribute.
-    // Should send event outside of the component.
     return html`
       <div class="ratio">
         <div class="content">

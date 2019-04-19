@@ -76,7 +76,6 @@ class GamePlayerPick extends connect(store)(LitElement) {
   _renderSelectedCard() {
     const { _selectedCard, _cards } = this;
 
-    // TODO: Add text, "Your selected card."
     return html`
       <h1>Waiting for everyone to pick.</h1>
       <div class="selected-card">

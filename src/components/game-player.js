@@ -10,7 +10,6 @@ import { GAME_STATES } from '../reducers/game.js';
 // These are the shared styles needed by this element.
 import { SharedStyles } from '../styles/shared-styles.js';
 
-// TODO: Load these dynamically?
 import './game-player-starting.js';
 import './game-player-pick.js';
 import './game-over.js';
