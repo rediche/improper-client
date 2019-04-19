@@ -4,7 +4,11 @@ import { store } from "./store.js";
 // These are the actions needed by this element.
 import { navigateToGame } from "./actions/app.js";
 
-import { updateGameState, updateGameCards } from "./actions/game.js";
+import {
+  updateGameState,
+  updateGameCards,
+  updateGameSelectedCard
+} from "./actions/game.js";
 import { GAME_STATES } from "./reducers/game.js";
 
 // TODO: Add socket host to config file
@@ -20,4 +24,8 @@ socket.on("game-started", () => {
 
 socket.on("new-round", ({ cards, blackCard }) => {
   store.dispatch(updateGameCards(cards));
+});
+
+socket.on("card-played", ({ id }) => {
+  store.dispatch(updateGameSelectedCard(id));
 });

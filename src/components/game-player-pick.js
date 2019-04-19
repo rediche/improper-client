@@ -5,8 +5,6 @@ import { PageViewElement } from './page-view-element.js';
 // This element is connected to the Redux store.
 import { store } from "../store.js";
 
-import { updateGameSelectedCard } from '../actions/game.js';
-
 // Load up socket.io
 import { socket } from '../socket.js';
 
@@ -100,7 +98,6 @@ class GamePlayerPick extends connect(store)(LitElement) {
 
   _cardSelected(event) {
     socket.emit('card-selected', { id: event.detail.id });
-    store.dispatch(updateGameSelectedCard(event.detail.id));
   }
 
   stateChanged({ game }) {
