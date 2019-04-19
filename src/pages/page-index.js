@@ -65,6 +65,7 @@ class PageIndex extends PageViewElement {
         p {
           margin-top: auto;
           text-align: center;
+          font-weight: 600;
         }
 
         @media screen and (min-width: 1024px) {
