@@ -29,3 +29,7 @@ socket.on("new-round", ({ cards, blackCard }) => {
 socket.on("card-played", ({ id }) => {
   store.dispatch(updateGameSelectedCard(id));
 });
+
+socket.on("find-winner", () => {
+  store.dispatch(updateGameState(GAME_STATES.CHOOSE_WINNER));
+});
