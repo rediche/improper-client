@@ -7,6 +7,9 @@ import { store } from "../store.js";
 
 import { updateGameSelectedCard } from '../actions/game.js';
 
+// Load up socket.io
+import { socket } from '../socket.js';
+
 // These are the shared styles needed by this element.
 import { SharedStyles } from '../styles/shared-styles.js';
 
@@ -96,6 +99,7 @@ class GamePlayerPick extends connect(store)(LitElement) {
   }
 
   _cardSelected(event) {
+    socket.emit('card-selected', { id: event.detail.id });
     store.dispatch(updateGameSelectedCard(event.detail.id));
   }
 
