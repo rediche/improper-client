@@ -1,12 +1,6 @@
 import { html, css } from "lit-element";
 import { PageViewElement } from "../components/page-view-element.js";
 
-// This element is connected to the Redux store.
-import { store } from "../store.js";
-
-// These are the actions needed by this element.
-import { navigateToGame } from "../actions/app.js";
-
 // Load up socket.io
 import { socket } from '../socket.js';
 
@@ -108,10 +102,7 @@ class PageIndex extends PageViewElement {
 
   _joinGame() {
     const { gameCode } = this; 
-    // Emit 'join-game' to socket.
     socket.emit('join-game', { code: gameCode });
-    // On 'game-joined' dispatch navigateToGame.
-    //store.dispatch(navigateToGame(this.gameCode));
   }
 }
 
