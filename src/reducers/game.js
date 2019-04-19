@@ -5,7 +5,8 @@ import {
   UPDATE_GAME_WINNER,
   UPDATE_GAME_SELECTED_CARD,
   UPDATE_GAME_CARDS,
-  UPDATE_GAME_CZAR
+  UPDATE_GAME_CZAR,
+  UPDATE_GAME_PLAYED_CARDS
 } from '../actions/game.js';
 
 export const PLAYER_TYPES = {
@@ -28,7 +29,8 @@ const INITIAL_STATE = {
   czar: null,
   winner: '',
   selectedCard: null,
-  cards: []
+  cards: [],
+  playedCards: []
 };
 
 const game = (state = INITIAL_STATE, action) => {
@@ -67,6 +69,11 @@ const game = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         czar: action.czar
+      };
+    case UPDATE_GAME_PLAYED_CARDS:
+      return {
+        ...state,
+        playedCards: action.playedCards
       };
     default:
       return state;

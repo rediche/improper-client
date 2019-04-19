@@ -12,6 +12,7 @@ import { SharedStyles } from '../styles/shared-styles.js';
 
 import './game-player-starting.js';
 import './game-player-pick.js';
+import './game-player-winner.js';
 import './game-over.js';
 
 class GamePlayer extends connect(store)(LitElement) {
@@ -42,7 +43,7 @@ class GamePlayer extends connect(store)(LitElement) {
       case GAME_STATES.PICKING_CARDS:
         return html`<game-player-pick></game-player-pick>`;
       case GAME_STATES.CHOOSE_WINNER:
-        return html`choosing winner`;
+        return html`<game-player-winner></game-player-winner>`;
       default:
         return html`<game-player-starting></game-player-starting>`;
     }

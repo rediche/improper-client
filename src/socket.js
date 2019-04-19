@@ -8,7 +8,8 @@ import {
   updateGameState,
   updateGameCards,
   updateGameSelectedCard,
-  updateGameCzar
+  updateGameCzar,
+  updateGamePlayedCards
 } from "./actions/game.js";
 import { GAME_STATES } from "./reducers/game.js";
 
@@ -32,6 +33,7 @@ socket.on("card-played", ({ id }) => {
   store.dispatch(updateGameSelectedCard(id));
 });
 
-socket.on("find-winner", () => {
+socket.on("find-winner", ({ playedCards }) => {
+  store.dispatch(updateGamePlayedCards(playedCards));
   store.dispatch(updateGameState(GAME_STATES.CHOOSE_WINNER));
 });
