@@ -11,13 +11,15 @@ import { SharedStyles } from '../styles/shared-styles.js';
 class GameOver extends connect(store)(LitElement) {
   static get properties() {
     return {
-      _winner: { type: String }
+      _id: { type: String },
+      _wins: { type: Number }
     };
   }
 
   constructor() {
     super();
-    this._winner = 'test';
+    this._id = null;
+    this._wins = null;
   }
 
   static get styles() {
@@ -49,18 +51,19 @@ class GameOver extends connect(store)(LitElement) {
   }
 
   render() {
-    const { _winner } = this;
+    const { _id, _wins } = this;
 
     return html`
       <div class="full-height">
-        <h1>Player ${_winner} wins.</h1>
+        <h1>Player ${_id} wins with ${_wins} points.</h1>
         <p>Game Over</p>
       </div>
     `;
   }
 
   stateChanged({ game }) {
-    this._winner = game.winner;
+    this._id = game.winner.id;
+    this._wins = game.winner.wins;
   }
 }
 

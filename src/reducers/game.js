@@ -30,7 +30,10 @@ const INITIAL_STATE = {
   playerType: PLAYER_TYPES.PLAYER,
   state: GAME_STATES.STARTING,
   czar: null,
-  winner: '',
+  winner: {
+    id: null,
+    wins: null
+  },
   selectedCard: null,
   blackCard: null,
   cards: [],

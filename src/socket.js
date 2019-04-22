@@ -12,6 +12,7 @@ import {
   updateGamePlayedCards,
   updatePlayerType,
   updateGameBlackCard,
+  updateGameWinner,
   resetRoundState
 } from "./actions/game.js";
 import { GAME_STATES, PLAYER_TYPES } from "./reducers/game.js";
@@ -58,4 +59,9 @@ socket.on("find-winner", ({ playedCards }) => {
 
 socket.on("winner-found", () => {
   console.log("Winner found!");
+});
+
+socket.on("game-ended", ({ winner, wins }) => {
+  store.dispatch(updateGameState(GAME_STATES.GAME_OVER));
+  store.dispatch(updateGameWinner({ id: winner, wins }));
 });

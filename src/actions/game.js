@@ -72,3 +72,10 @@ export const resetRoundState = () => {
     type: RESET_ROUND_STATE
   };
 };
+
+export const updateGameWinner = (winner) => {
+  return {
+    type: UPDATE_GAME_WINNER,
+    winner
+  };
+};
