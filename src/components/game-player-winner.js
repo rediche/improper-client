@@ -17,7 +17,8 @@ class GamePlayerWinner extends connect(store)(LitElement) {
   static get properties() {
     return {
       _playedCards: { type: Array },
-      _isCzar: { type: Boolean }
+      _isCzar: { type: Boolean },
+      _gameCode: { type: String }
     };
   }
 
@@ -25,6 +26,7 @@ class GamePlayerWinner extends connect(store)(LitElement) {
     super();
     this._playedCards = [];
     this._isCzar = false;
+    this._gameCode = '';
   }
 
   static get styles() {
@@ -104,10 +106,15 @@ class GamePlayerWinner extends connect(store)(LitElement) {
   }
 
   _cardSelected(event) {
-    socket.emit("winner-selected", { id: event.detail.id });
+    const { _gameCode } = this;
+    socket.emit("winner-selected", { 
+      cardId: event.detail.id, 
+      gameCode: _gameCode 
+    });
   }
 
   stateChanged({ game }) {
+    this._gameCode = game.code;
     this._playedCards = game.playedCards;
     this._isCzar = game.czar === socket.id;
   }

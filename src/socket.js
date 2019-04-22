@@ -35,7 +35,7 @@ socket.on("new-round-host", ({ blackCard }) => {
   store.dispatch(updateGameBlackCard(blackCard));
 });
 
-socket.on("new-round", ({ cards, blackCard, czar }) => {
+socket.on("new-round", ({ cards, czar }) => {
   store.dispatch(updateGameCzar(czar));
   store.dispatch(updateGameCards(cards));
 });
@@ -51,4 +51,8 @@ socket.on("card-played", ({ id }) => {
 socket.on("find-winner", ({ playedCards }) => {
   store.dispatch(updateGamePlayedCards(playedCards));
   store.dispatch(updateGameState(GAME_STATES.CHOOSE_WINNER));
+});
+
+socket.on("winner-found", () => {
+  console.log("Winner found!");
 });
