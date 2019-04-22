@@ -36,6 +36,7 @@ const INITIAL_STATE = {
   playedCards: []
 };
 
+// REPORT: Debugging with redux
 const game = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case UPDATE_GAME_CODE:
