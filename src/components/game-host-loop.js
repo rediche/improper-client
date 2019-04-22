@@ -19,7 +19,8 @@ class GameHostLoop extends connect(store)(LitElement) {
     return {
       _blackCard: { type: String },
       _playedCards: { type: Array },
-      _gameState: { type: String }
+      _gameState: { type: String },
+      _roundWinner: { type: Object }
     };
   }
 
@@ -28,6 +29,7 @@ class GameHostLoop extends connect(store)(LitElement) {
     this._blackCard = "";
     this._playedCards = [];
     this._gameState = "";
+    this._roundWinner = null;
   }
 
   static get styles() {
@@ -38,6 +40,26 @@ class GameHostLoop extends connect(store)(LitElement) {
         .layout {
           display: flex;
           margin: 24px;
+          position: relative;
+        }
+
+        .winning-card {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0,.5);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          z-index: 1;
+        }
+
+        h1 {
+          margin-bottom: 24px;
+          color: #ffffff;
         }
 
         .left {
@@ -61,10 +83,12 @@ class GameHostLoop extends connect(store)(LitElement) {
   }
 
   render() {
-    const { _blackCard } = this;
+    const { _blackCard, _roundWinner } = this;
 
     return html`
       <div class="layout">
+        ${ _roundWinner ? this._renderWinnerCard() : "" }
+
         <div class="left">
           <game-card type="black" .card="${_blackCard}"></game-card>
         </div>
@@ -73,6 +97,17 @@ class GameHostLoop extends connect(store)(LitElement) {
       </div>
 
       <!-- TODO: Highlight the winning card for x seconds. -->
+    `;
+  }
+
+  _renderWinnerCard() {
+    const { _roundWinner } = this;
+
+    return html`
+      <div class="winning-card">
+        <h1>Winner of the round.</h1>
+        <game-card .card="${_roundWinner}"></game-card>
+      </div>
     `;
   }
 
@@ -96,6 +131,7 @@ class GameHostLoop extends connect(store)(LitElement) {
     this._gameState = game.state;
     this._playedCards = game.playedCards.filter(card => card !== null);
     this._blackCard = game.blackCard;
+    this._roundWinner = game.roundWinner;
   }
 }
 

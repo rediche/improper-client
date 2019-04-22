@@ -8,6 +8,7 @@ import {
   UPDATE_GAME_CZAR,
   UPDATE_GAME_PLAYED_CARDS,
   UPDATE_GAME_BLACK_CARD,
+  UPDATE_GAME_ROUND_WINNER,
   RESET_ROUND_STATE
 } from '../actions/game.js';
 
@@ -37,7 +38,8 @@ const INITIAL_STATE = {
   selectedCard: null,
   blackCard: null,
   cards: [],
-  playedCards: []
+  playedCards: [],
+  roundWinner: null
 };
 
 // REPORT: Debugging with redux
@@ -88,6 +90,11 @@ const game = (state = INITIAL_STATE, action) => {
         ...state,
         blackCard: action.blackCard
       };
+    case UPDATE_GAME_ROUND_WINNER:
+      return {
+        ...state,
+        roundWinner: action.roundWinner
+      };
     case RESET_ROUND_STATE:
       return {
         ...state,
@@ -96,7 +103,8 @@ const game = (state = INITIAL_STATE, action) => {
         selectedCard: null,
         blackCard: null,
         cards: [],
-        playedCards: []
+        playedCards: [],
+        roundWinner: null
       };
     default:
       return state;

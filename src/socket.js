@@ -13,7 +13,8 @@ import {
   updatePlayerType,
   updateGameBlackCard,
   updateGameWinner,
-  resetRoundState
+  resetRoundState,
+  updateGameRoundWinner
 } from "./actions/game.js";
 import { GAME_STATES, PLAYER_TYPES } from "./reducers/game.js";
 
@@ -57,8 +58,9 @@ socket.on("find-winner", ({ playedCards }) => {
   store.dispatch(updateGameState(GAME_STATES.CHOOSE_WINNER));
 });
 
-socket.on("winner-found", () => {
-  console.log("Winner found!");
+socket.on("winner-found", ({ card }) => {
+  console.log("Winner found", card);
+  store.dispatch(updateGameRoundWinner(card));
 });
 
 socket.on("game-ended", ({ winner, wins }) => {
