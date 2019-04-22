@@ -79,7 +79,7 @@ class GamePlayerWinner extends connect(store)(LitElement) {
 
   _renderWaiting() {
     return html`
-      <h1 class="vertical-center">Waiting for everyone to pick.</h1>
+      <h1 class="vertical-center">Waiting for Czar to pick.</h1>
     `;
   }
 

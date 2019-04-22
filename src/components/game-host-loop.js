@@ -72,7 +72,7 @@ class GameHostLoop extends connect(store)(LitElement) {
         <div class="right">${this._renderCardList()}</div>
       </div>
 
-      <!-- Show black card. Start showing blank white cards for each answer. When state changes to choose_winner, then show text on cards. Highlight the winning card for x seconds. -->
+      <!-- TODO: Highlight the winning card for x seconds. -->
     `;
   }
 
