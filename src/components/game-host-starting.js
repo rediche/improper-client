@@ -5,6 +5,8 @@ import { PageViewElement } from './page-view-element.js';
 // This element is connected to the Redux store.
 import { store } from "../store.js";
 
+import { socket } from "../socket.js";
+
 // These are the shared styles needed by this element.
 import { SharedStyles } from '../styles/shared-styles.js';
 import { ButtonSharedStyles } from '../styles/button-shared-styles.js';
@@ -57,16 +59,21 @@ class GameHostStarting extends connect(store)(LitElement) {
   }
 
   render() {
-    const { _gameCode } = this;
+    const { _gameCode, _startGame } = this;
 
     return html`
       <div class="full-height">
         <p>Game code</p>
         <h1>${_gameCode.toUpperCase()}</h1>
         <h1 class="joined">X players joined.</h1>
-        <button>Start game</button>
+        <button @click="${_startGame}">Start game</button>
       </div>
     `;
+  }
+
+  _startGame() {
+    // TODO: Should we emit the game code here?
+    socket.emit('start-game');
   }
 
   stateChanged({ game }) {
