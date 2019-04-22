@@ -11,6 +11,7 @@ import { GAME_STATES } from '../reducers/game.js';
 import { SharedStyles } from '../styles/shared-styles.js';
 
 import './game-host-starting.js';
+import './game-host-loop.js';
 import './game-over.js';
 
 class GameHost extends connect(store)(LitElement) {
@@ -40,7 +41,7 @@ class GameHost extends connect(store)(LitElement) {
         return html`<game-over></game-over>`;
       case GAME_STATES.PICKING_CARDS:
       case GAME_STATES.CHOOSE_WINNER:
-        return html`Show black card. Start showing blank white cards for each answer. When state changes to choose_winner, then show text on cards. Highlight the winning card for x seconds.`;
+        return html`<game-host-loop></game-host-loop>`;
       default:
         return html`<game-host-starting></game-host-starting>`;
     }

@@ -10,7 +10,8 @@ import {
   updateGameSelectedCard,
   updateGameCzar,
   updateGamePlayedCards,
-  updatePlayerType
+  updatePlayerType,
+  updateGameBlackCard
 } from "./actions/game.js";
 import { GAME_STATES, PLAYER_TYPES } from "./reducers/game.js";
 
@@ -30,9 +31,17 @@ socket.on("game-started", () => {
   store.dispatch(updateGameState(GAME_STATES.PICKING_CARDS));
 });
 
+socket.on("new-round-host", ({ blackCard }) => {
+  store.dispatch(updateGameBlackCard(blackCard));
+});
+
 socket.on("new-round", ({ cards, blackCard, czar }) => {
   store.dispatch(updateGameCzar(czar));
   store.dispatch(updateGameCards(cards));
+});
+
+socket.on("card-played-host", ({ playedCards }) => {
+  store.dispatch(updateGamePlayedCards(playedCards));
 });
 
 socket.on("card-played", ({ id }) => {

@@ -6,7 +6,8 @@ import {
   UPDATE_GAME_SELECTED_CARD,
   UPDATE_GAME_CARDS,
   UPDATE_GAME_CZAR,
-  UPDATE_GAME_PLAYED_CARDS
+  UPDATE_GAME_PLAYED_CARDS,
+  UPDATE_GAME_BLACK_CARD
 } from '../actions/game.js';
 
 // REPORT: Talk about using objects with strings to make sure everything is typed correctly.
@@ -30,6 +31,7 @@ const INITIAL_STATE = {
   czar: null,
   winner: '',
   selectedCard: null,
+  blackCard: null,
   cards: [],
   playedCards: []
 };
@@ -75,6 +77,11 @@ const game = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         playedCards: action.playedCards
+      };
+    case UPDATE_GAME_BLACK_CARD:
+      return {
+        ...state,
+        blackCard: action.blackCard
       };
     default:
       return state;
