@@ -79,7 +79,7 @@ class PageIndex extends PageViewElement {
   }
 
   render() {
-    const { gameCode, _joinGame, _changeGameCode } = this;
+    const { gameCode, _joinGame, _changeGameCode, _createGame } = this;
 
     return html`
       <div class="wrapper">
@@ -88,7 +88,7 @@ class PageIndex extends PageViewElement {
         <div class="form">
           <input type="text" maxlength="6" placeholder="Enter game code" @input="${_changeGameCode}">
           <button type="button" ?disabled="${gameCode.length !== 6}" @click="${_joinGame}">Join game</a>
-          <button type="button" class="transparent">Create a new game</button>
+          <button type="button" class="transparent" @click="${_createGame}">Create a new game</button>
         </div>
   
         <p>A <a href="https://www.cardsagainsthumanity.com/" target="_blank" rel="noopener">Cards Against Humanity</a> clone.</p>
@@ -103,6 +103,10 @@ class PageIndex extends PageViewElement {
   _joinGame() {
     const { gameCode } = this; 
     socket.emit('join-game', { code: gameCode });
+  }
+
+  _createGame() {
+    socket.emit('create-game');
   }
 }
 

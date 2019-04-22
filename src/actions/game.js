@@ -30,7 +30,7 @@ export const updateGameState = (state) => {
   };
 };
 
-const updatePlayerType = (playerType) => {
+export const updatePlayerType = (playerType) => {
   return {
     type: UPDATE_PLAYER_TYPE,
     playerType
