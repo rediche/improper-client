@@ -78,8 +78,6 @@ class GamePlayerWinner extends connect(store)(LitElement) {
   }
 
   _renderWaiting() {
-    const { _isCzar } = this;
-
     return html`
       <h1 class="vertical-center">Waiting for everyone to pick.</h1>
     `;

@@ -9,6 +9,7 @@ import {
   UPDATE_GAME_PLAYED_CARDS
 } from '../actions/game.js';
 
+// REPORT: Talk about using objects with strings to make sure everything is typed correctly.
 export const PLAYER_TYPES = {
   HOST: 'HOST',
   PLAYER: 'PLAYER'
