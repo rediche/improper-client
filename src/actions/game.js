@@ -9,6 +9,7 @@ export const UPDATE_GAME_CARDS = 'UPDATE_GAME_CARDS';
 export const UPDATE_GAME_CZAR = 'UPDATE_GAME_CZAR';
 export const UPDATE_GAME_PLAYED_CARDS = 'UPDATE_GAME_PLAYED_CARDS';
 export const UPDATE_GAME_BLACK_CARD = 'UPDATE_GAME_BLACK_CARD';
+export const RESET_ROUND_STATE = 'RESET_ROUND_STATE';
 
 export const updateGameCode = (code) => {
   return {
@@ -63,5 +64,11 @@ export const updateGameBlackCard = (blackCard) => {
   return {
     type: UPDATE_GAME_BLACK_CARD,
     blackCard
+  };
+};
+
+export const resetRoundState = () => {
+  return {
+    type: RESET_ROUND_STATE
   };
 };

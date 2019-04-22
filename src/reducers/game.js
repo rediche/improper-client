@@ -7,7 +7,8 @@ import {
   UPDATE_GAME_CARDS,
   UPDATE_GAME_CZAR,
   UPDATE_GAME_PLAYED_CARDS,
-  UPDATE_GAME_BLACK_CARD
+  UPDATE_GAME_BLACK_CARD,
+  RESET_ROUND_STATE
 } from '../actions/game.js';
 
 // REPORT: Talk about using objects with strings to make sure everything is typed correctly.
@@ -83,6 +84,16 @@ const game = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         blackCard: action.blackCard
+      };
+    case RESET_ROUND_STATE:
+      return {
+        ...state,
+        state: GAME_STATES.PICKING_CARDS,
+        czar: null,
+        selectedCard: null,
+        blackCard: null,
+        cards: [],
+        playedCards: []
       };
     default:
       return state;
