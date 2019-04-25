@@ -20,7 +20,7 @@ import {
 import { GAME_STATES, PLAYER_TYPES } from "./reducers/game.js";
 
 // TODO: Add socket host to config file
-export const socket = io("http://localhost:3000");
+export const socket = io("https://improper-server.herokuapp.com:3000");
 
 socket.on('game-created', ({ code }) => {
   store.dispatch(updatePlayerType(PLAYER_TYPES.HOST));
