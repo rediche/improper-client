@@ -14,13 +14,15 @@ import { ButtonSharedStyles } from '../styles/button-shared-styles.js';
 class GameHostStarting extends connect(store)(LitElement) {
   static get properties() {
     return {
-      _gameCode: { type: String }
+      _gameCode: { type: String },
+      _playerCount: { type: Number }
     };
   }
 
   constructor() {
     super();
     this._gameCode = '';
+    this._playerCount = 0;
   }
 
   static get styles() {
@@ -59,13 +61,13 @@ class GameHostStarting extends connect(store)(LitElement) {
   }
 
   render() {
-    const { _gameCode, _startGame } = this;
+    const { _gameCode, _startGame, _playerCount } = this;
 
     return html`
       <div class="full-height">
         <p>Game code</p>
         <h1>${_gameCode.toUpperCase()}</h1>
-        <h1 class="joined">X players joined.</h1>
+        <h1 class="joined">${_playerCount} players joined.</h1>
         <button @click="${_startGame}">Start game</button>
       </div>
     `;
@@ -78,6 +80,7 @@ class GameHostStarting extends connect(store)(LitElement) {
 
   stateChanged({ game }) {
     this._gameCode = game.code;
+    this._playerCount = game.playerCount;
   }
 }
 

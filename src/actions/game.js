@@ -11,6 +11,7 @@ export const UPDATE_GAME_PLAYED_CARDS = 'UPDATE_GAME_PLAYED_CARDS';
 export const UPDATE_GAME_BLACK_CARD = 'UPDATE_GAME_BLACK_CARD';
 export const UPDATE_GAME_ROUND_WINNER = 'UPDATE_GAME_ROUND_WINNER';
 export const RESET_ROUND_STATE = 'RESET_ROUND_STATE';
+export const UPDATE_GAME_PLAYER_COUNT = 'UPDATE_GAME_PLAYER_COUNT';
 
 export const updateGameCode = (code) => {
   return {
@@ -85,5 +86,12 @@ export const updateGameRoundWinner = (roundWinner) => {
   return {
     type: UPDATE_GAME_ROUND_WINNER,
     roundWinner
+  };
+};
+
+export const updateGamePlayerCount = (playerCount) => {
+  return {
+    type: UPDATE_GAME_PLAYER_COUNT,
+    playerCount
   };
 };

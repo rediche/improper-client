@@ -9,7 +9,8 @@ import {
   UPDATE_GAME_PLAYED_CARDS,
   UPDATE_GAME_BLACK_CARD,
   UPDATE_GAME_ROUND_WINNER,
-  RESET_ROUND_STATE
+  RESET_ROUND_STATE,
+  UPDATE_GAME_PLAYER_COUNT
 } from '../actions/game.js';
 
 // REPORT: Talk about using objects with strings to make sure everything is typed correctly.
@@ -39,7 +40,8 @@ const INITIAL_STATE = {
   blackCard: null,
   cards: [],
   playedCards: [],
-  roundWinner: null
+  roundWinner: null,
+  playerCount: 0
 };
 
 // REPORT: Debugging with redux
@@ -94,6 +96,11 @@ const game = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         roundWinner: action.roundWinner
+      };
+    case UPDATE_GAME_PLAYER_COUNT:
+      return {
+        ...state,
+        playerCount: action.playerCount
       };
     case RESET_ROUND_STATE:
       return {

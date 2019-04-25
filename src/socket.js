@@ -14,7 +14,8 @@ import {
   updateGameBlackCard,
   updateGameWinner,
   resetRoundState,
-  updateGameRoundWinner
+  updateGameRoundWinner,
+  updateGamePlayerCount
 } from "./actions/game.js";
 import { GAME_STATES, PLAYER_TYPES } from "./reducers/game.js";
 
@@ -28,6 +29,10 @@ socket.on('game-created', ({ code }) => {
 
 socket.on("game-joined", ({ code }) => {
   store.dispatch(navigateToGame(code));
+});
+
+socket.on("player-connected", ({ playerCount }) => {
+  store.dispatch(updateGamePlayerCount(playerCount));
 });
 
 socket.on("game-started", () => {
