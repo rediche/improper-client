@@ -2,7 +2,7 @@ import { html, css } from "lit-element";
 import { PageViewElement } from "../components/page-view-element.js";
 
 // Load up socket.io
-import { socket } from '../socket.js';
+import { socket } from "../socket.js";
 
 // These are the shared styles needed by this element.
 import { SharedStyles } from "../styles/shared-styles.js";
@@ -12,13 +12,13 @@ import { ButtonSharedStyles } from "../styles/button-shared-styles.js";
 class PageIndex extends PageViewElement {
   static get properties() {
     return {
-      gameCode: { type: String }
+      _gameCode: { type: String }
     };
   }
 
   constructor() {
     super();
-    this.gameCode = "";
+    this._gameCode = "";
   }
 
   static get styles() {
@@ -79,15 +79,16 @@ class PageIndex extends PageViewElement {
   }
 
   render() {
-    const { gameCode, _joinGame, _changeGameCode, _createGame } = this;
+    const { _gameCode, _joinGame, _changeGameCode, _createGame, _keyup } = this;
 
     return html`
       <div class="wrapper">
         <h1>Improper Cards.</h1>
   
         <div class="form">
-          <input type="text" maxlength="6" placeholder="Enter game code" @input="${_changeGameCode}">
-          <button type="button" ?disabled="${gameCode.length !== 6}" @click="${_joinGame}">Join game</a>
+          <input type="text" maxlength="6" placeholder="Enter game code" @input="${_changeGameCode}" @keyup="${_keyup}">
+          <button type="button" ?disabled="${_gameCode.length !==
+            6}" @click="${_joinGame}">Join game</a>
           <button type="button" class="transparent" @click="${_createGame}">Create a new game</button>
         </div>
   
@@ -96,17 +97,25 @@ class PageIndex extends PageViewElement {
     `;
   }
 
+  _keyup(e) {
+    const { _gameCode } = this;
+
+    if (_gameCode.length === 6 && e.key === "Enter") {
+      socket.emit("join-game", { code: _gameCode });
+    }
+  }
+
   _changeGameCode(e) {
-    this.gameCode = e.target.value;
+    this._gameCode = e.target.value;
   }
 
   _joinGame() {
-    const { gameCode } = this; 
-    socket.emit('join-game', { code: gameCode });
+    const { _gameCode } = this;
+    socket.emit("join-game", { code: _gameCode });
   }
 
   _createGame() {
-    socket.emit('create-game');
+    socket.emit("create-game");
   }
 }
 
