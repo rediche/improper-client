@@ -4,6 +4,7 @@ import { PageViewElement } from "./page-view-element.js";
 
 // This element is connected to the Redux store.
 import { store } from "../store.js";
+import { GAME_STATES } from "../reducers/game.js";
 
 import { socket } from "../socket.js";
 
@@ -12,7 +13,7 @@ import { SharedStyles } from "../styles/shared-styles.js";
 import { ButtonSharedStyles } from "../styles/button-shared-styles.js";
 
 import "./game-card.js";
-import { GAME_STATES } from "../reducers/game.js";
+import "./end-game.js";
 
 class GameHostLoop extends connect(store)(LitElement) {
   static get properties() {
@@ -39,8 +40,9 @@ class GameHostLoop extends connect(store)(LitElement) {
       css`
         .layout {
           display: flex;
-          margin: 24px;
+          padding: 24px;
           position: relative;
+          min-height: 100vh;
         }
 
         .winning-card {
@@ -66,6 +68,12 @@ class GameHostLoop extends connect(store)(LitElement) {
           width: 300px;
           margin-right: 24px;
           flex: none;
+          display: flex;
+          flex-direction: column;
+        }
+
+        end-game {
+          margin-top: auto;
         }
 
         .right {
@@ -91,6 +99,7 @@ class GameHostLoop extends connect(store)(LitElement) {
 
         <div class="left">
           <game-card type="black" .card="${_blackCard}"></game-card>
+          <end-game></end-game>
         </div>
 
         <div class="right">${this._renderCardList()}</div>
