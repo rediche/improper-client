@@ -95,8 +95,6 @@ class GameHostLoop extends connect(store)(LitElement) {
 
         <div class="right">${this._renderCardList()}</div>
       </div>
-
-      <!-- TODO: Highlight the winning card for x seconds. -->
     `;
   }
 
