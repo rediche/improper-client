@@ -7,6 +7,7 @@
   "extraDependencies": [
     "manifest.json",
     "node_modules/@webcomponents/webcomponentsjs/**",
+    "node_modules/socket.io-client/dist/socket.io.slim.js",
     "push-manifest.json"
   ],
   "builds": [
