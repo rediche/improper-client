@@ -10,7 +10,7 @@
 
 ### Built application
 
-`npm run serve`
+`npm run serve:static`
 
 ## Build
 
