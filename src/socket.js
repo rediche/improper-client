@@ -24,7 +24,7 @@ import {
 
 import { GAME_STATES, PLAYER_TYPES } from "./reducers/game.js";
 
-// TODO: Add socket host to config file, remember port on localhost
+// REPORT: Talk about netlify injects
 export const socket = io(window.improperBackendUrl || '127.0.0.1:3000');
 
 socket.on('game-created', ({ code }) => {
