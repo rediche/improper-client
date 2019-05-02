@@ -1,6 +1,5 @@
 import { LitElement, html, css } from 'lit-element';
 import { connect } from 'pwa-helpers/connect-mixin.js';
-import { installOfflineWatcher } from 'pwa-helpers/network.js';
 import { installRouter } from 'pwa-helpers/router.js';
 import { updateMetadata } from 'pwa-helpers/metadata.js';
 
@@ -9,12 +8,11 @@ import { store } from '../store.js';
 
 // These are the actions needed by this element.
 import {
-  navigate,
-  updateOffline
+  navigate
 } from '../actions/app.js';
 
 // These are the elements needed by this element.
-import './snack-bar.js';
+import './error-messages.js';
 
 class ImproperClient extends connect(store)(LitElement) {
   static get properties() {
@@ -59,15 +57,12 @@ class ImproperClient extends connect(store)(LitElement) {
         <my-view404 class="page" ?active="${this._page === 'view404'}"></my-view404>
       </main>
 
-      <snack-bar ?active="${this._snackbarOpened}">
-        You are now ${this._offline ? 'offline' : 'online'}.
-      </snack-bar>
+      <error-messages></error-messages>
     `;
   }
 
   firstUpdated() {
     installRouter((location) => store.dispatch(navigate(decodeURIComponent(location.pathname))));
-    installOfflineWatcher((offline) => store.dispatch(updateOffline(offline)));
   }
 
   updated(changedProps) {

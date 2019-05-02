@@ -1,14 +1,11 @@
 import {
   UPDATE_PAGE,
-  UPDATE_OFFLINE,
-  OPEN_SNACKBAR,
-  CLOSE_SNACKBAR,
+  UPDATE_ERROR_MESSAGES
 } from '../actions/app.js';
 
 const INITIAL_STATE = {
   page: '',
-  offline: false,
-  snackbarOpened: false,
+  errorMessages: []
 };
 
 const app = (state = INITIAL_STATE, action) => {
@@ -18,20 +15,10 @@ const app = (state = INITIAL_STATE, action) => {
         ...state,
         page: action.page
       };
-    case UPDATE_OFFLINE:
+    case UPDATE_ERROR_MESSAGES:
       return {
         ...state,
-        offline: action.offline
-      };
-    case OPEN_SNACKBAR:
-      return {
-        ...state,
-        snackbarOpened: true
-      };
-    case CLOSE_SNACKBAR:
-      return {
-        ...state,
-        snackbarOpened: false
+        errorMessages: action.errorMessages
       };
     default:
       return state;
