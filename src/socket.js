@@ -17,6 +17,11 @@ import {
   updateGameRoundWinner,
   updateGamePlayerCount
 } from "./actions/game.js";
+
+import {
+  addErrorMessage
+} from "./actions/app.js";
+
 import { GAME_STATES, PLAYER_TYPES } from "./reducers/game.js";
 
 // TODO: Add socket host to config file, remember port on localhost
@@ -71,4 +76,8 @@ socket.on("winner-found", ({ card }) => {
 socket.on("game-ended", ({ winner, wins }) => {
   store.dispatch(updateGameState(GAME_STATES.GAME_OVER));
   store.dispatch(updateGameWinner({ id: winner, wins }));
+});
+
+socket.on("error-message", ({ errorMessage }) => {
+  store.dispatch(addErrorMessage(errorMessage));
 });
