@@ -80,11 +80,13 @@ class GameHostLoop extends connect(store)(LitElement) {
           width: 100%;
           display: grid;
           grid-template-columns: repeat(auto-fill, 300px);
+          grid-template-rows: max-content;
           grid-gap: 24px;
         }
 
         game-card {
           width: 300px;
+          align-self: flex-start;
         }
       `
     ];
