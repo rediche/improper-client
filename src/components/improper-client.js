@@ -67,19 +67,16 @@ class ImproperClient extends connect(store)(LitElement) {
 
   updated(changedProps) {
     if (changedProps.has('_page')) {
-      const pageTitle = `${this._page} - ${this.appTitle}`;
+      const pageTitle = `${this.appTitle}`;
       updateMetadata({
         title: pageTitle,
         description: pageTitle
-        // This object also takes an image property, that points to an img src.
       });
     }
   }
 
   stateChanged(state) {
     this._page = state.app.page;
-    this._offline = state.app.offline;
-    this._snackbarOpened = state.app.snackbarOpened;
   }
 }
 
