@@ -86,6 +86,9 @@ class GameHostLoop extends connect(store)(LitElement) {
 
         game-card {
           width: 300px;
+        }
+        
+        .right game-card {
           align-self: flex-start;
         }
       `
