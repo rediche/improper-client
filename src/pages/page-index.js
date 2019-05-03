@@ -86,7 +86,7 @@ class PageIndex extends PageViewElement {
         <h1>Improper Cards.</h1>
   
         <div class="form">
-          <input type="text" maxlength="6" placeholder="Enter game code" @input="${_changeGameCode}" @keyup="${_keyup}">
+          <input type="text" maxlength="6" placeholder="Enter game code" value="${_gameCode}" @input="${_changeGameCode}" @keyup="${_keyup}">
           <button type="button" ?disabled="${_gameCode.length !==
             6}" @click="${_joinGame}">Join game</a>
           <button type="button" class="transparent" @click="${_createGame}">Create a new game</button>
