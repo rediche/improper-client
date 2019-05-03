@@ -3,6 +3,11 @@ import { updateGameCode } from "./game.js";
 export const UPDATE_PAGE = "UPDATE_PAGE";
 export const UPDATE_ERROR_MESSAGES = "UPDATE_ERROR_MESSAGES";
 
+export const navigateToUrl = path => dispatch => {
+  window.history.pushState({}, "", path);
+  dispatch(navigate(path));
+}
+
 export const navigateToGame = gameCode => dispatch => {
   const newLocation = `/game/${gameCode}`;
   window.history.pushState({}, "", newLocation);

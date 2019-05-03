@@ -1,4 +1,4 @@
-import { navigate } from './app.js';
+import { navigateToUrl } from './app.js';
 
 export const UPDATE_GAME_CODE = 'UPDATE_GAME_CODE';
 export const UPDATE_GAME_STATE = 'UPDATE_GAME_STATE';
@@ -99,7 +99,7 @@ export const updateGamePlayerCount = (playerCount) => {
 
 export const restartGame = () => dispatch => {
   dispatch(resetGameToInitialState());
-  dispatch(navigate("/"));
+  dispatch(navigateToUrl("/"));
 };
 
 const resetGameToInitialState = () => {
