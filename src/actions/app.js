@@ -9,7 +9,7 @@ export const navigateToGame = gameCode => dispatch => {
   dispatch(loadGameByCode(gameCode));
 };
 
-export const navigate = path => (dispatch, getState) => {
+export const navigate = path => dispatch => {
   // Extract the page name from path.
   const page = path === "/" ? "index" : path.slice(1);
 

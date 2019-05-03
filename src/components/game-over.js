@@ -5,6 +5,8 @@ import { PageViewElement } from './page-view-element.js';
 // This element is connected to the Redux store.
 import { store } from "../store.js";
 
+import { restartGame } from '../actions/game.js';
+
 // These are the shared styles needed by this element.
 import { SharedStyles } from '../styles/shared-styles.js';
 import { ButtonSharedStyles } from '../styles/button-shared-styles.js';
@@ -41,6 +43,7 @@ class GameOver extends connect(store)(LitElement) {
 
         button {
           align-self: center;
+          padding: 0 32px;
         }
 
         @media screen and (min-width: 1024px) {
@@ -57,15 +60,19 @@ class GameOver extends connect(store)(LitElement) {
   }
 
   render() {
-    const { _id, _wins } = this;
+    const { _id, _wins, _restartGame } = this;
 
     return html`
       <div class="full-height">
         <h1>Player ${_id} wins with ${_wins} points.</h1>
         <p>Game Over</p>
-        <button>Start or join a new game</button>
+        <button @click="${_restartGame}">Start or join a new game</button>
       </div>
     `;
+  }
+
+  _restartGame() {
+    store.dispatch(restartGame());
   }
 
   stateChanged({ game }) {

@@ -12,6 +12,7 @@ export const UPDATE_GAME_BLACK_CARD = 'UPDATE_GAME_BLACK_CARD';
 export const UPDATE_GAME_ROUND_WINNER = 'UPDATE_GAME_ROUND_WINNER';
 export const RESET_ROUND_STATE = 'RESET_ROUND_STATE';
 export const UPDATE_GAME_PLAYER_COUNT = 'UPDATE_GAME_PLAYER_COUNT';
+export const RESET_GAME_INITIAL_STATE = "RESET_GAME_INITIAL_STATE";
 
 export const updateGameCode = (code) => {
   return {
@@ -93,5 +94,16 @@ export const updateGamePlayerCount = (playerCount) => {
   return {
     type: UPDATE_GAME_PLAYER_COUNT,
     playerCount
+  };
+};
+
+export const restartGame = () => dispatch => {
+  dispatch(resetGameToInitialState());
+  dispatch(navigate("/"));
+};
+
+const resetGameToInitialState = () => {
+  return {
+    type: RESET_GAME_INITIAL_STATE
   };
 };
