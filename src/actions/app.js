@@ -6,42 +6,37 @@ export const UPDATE_ERROR_MESSAGES = "UPDATE_ERROR_MESSAGES";
 export const navigateToGame = gameCode => dispatch => {
   const newLocation = `/game/${gameCode}`;
   window.history.pushState({}, "", newLocation);
-  dispatch(navigate(newLocation));
+  dispatch(loadGameByCode(gameCode));
 };
 
-export const navigate = path => dispatch => {
+export const navigate = path => (dispatch, getState) => {
   // Extract the page name from path.
   const page = path === "/" ? "index" : path.slice(1);
 
   // Dynamic routing logic for game route.
   const splitPath = path.split("/");
 
-  if (
-    splitPath.length > 2 &&
-    splitPath[1] === "game" &&
-    splitPath[2].length === 6
-  ) {
-    dispatch(loadGameByCode(splitPath[2]));
-  } else {
-    dispatch(loadPage(page));
+  if (splitPath.length > 2 && splitPath[1] === "game") {
+    dispatch(addErrorMessage("You have to join a game, by entering its code."));
+    window.history.pushState({}, "", "/");
+    dispatch(navigate("/"));
+    return;
   }
+
+  dispatch(loadPage(page));
 };
 
 const loadGameByCode = gameCode => dispatch => {
   import("../pages/page-game.js").then(module => {
     dispatch(updateGameCode(gameCode));
+    dispatch(updatePage("game"));
   });
-
-  dispatch(updatePage("game"));
 };
 
 const loadPage = page => dispatch => {
   switch (page) {
     case "index":
-      import("../pages/page-index.js").then(module => {
-        // Put code in here that you want to run every time when
-        // navigating to view1 after my-view1.js is loaded.
-      });
+      import("../pages/page-index.js");
       break;
     default:
       page = "view404";
@@ -75,7 +70,7 @@ let oldMessageTimer;
 
 export const removeOldestErrorMessage = () => (dispatch, getState) => {
   clearTimeout(oldMessageTimer);
-  
+
   oldMessageTimer = setTimeout(() => {
     dispatch(
       updateErrorMessages(
