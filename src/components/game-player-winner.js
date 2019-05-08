@@ -1,6 +1,6 @@
 import { LitElement, html, css } from "lit-element";
 import { connect } from "pwa-helpers/connect-mixin.js";
-import { PageViewElement } from "./page-view-element.js";
+import { shuffle } from '../utils';
 
 // This element is connected to the Redux store.
 import { store } from "../store.js";
@@ -103,11 +103,12 @@ class GamePlayerWinner extends connect(store)(LitElement) {
 
   _renderCardList() {
     const { _playedCards, _cardSelected, _hasSelectedCard } = this;
+    const shuffledCards = shuffle(_playedCards);
 
     return html`
       <h1>Pick a winner.</h1>
       <div class="cards">
-        ${_playedCards.map(
+        ${shuffledCards.map(
           card =>
             html`
               <game-card
