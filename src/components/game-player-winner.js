@@ -18,7 +18,8 @@ class GamePlayerWinner extends connect(store)(LitElement) {
     return {
       _playedCards: { type: Array },
       _isCzar: { type: Boolean },
-      _gameCode: { type: String }
+      _gameCode: { type: String },
+      _selectedCard: { type: Number }
     };
   }
 
@@ -26,7 +27,8 @@ class GamePlayerWinner extends connect(store)(LitElement) {
     super();
     this._playedCards = [];
     this._isCzar = false;
-    this._gameCode = '';
+    this._gameCode = "";
+    this._selectedCard = null;
   }
 
   static get styles() {
@@ -68,12 +70,14 @@ class GamePlayerWinner extends connect(store)(LitElement) {
   }
 
   render() {
-    const { _isCzar } = this;
+    const { _isCzar, _selectedCard } = this;
 
     return html`
       <div class="full-height">
-        ${ _isCzar
-          ? this._renderCardList()
+        ${_isCzar
+          ? _selectedCard
+            ? this._renderSelectedCard()
+            : this._renderCardList()
           : this._renderWaiting()}
       </div>
     `;
@@ -85,13 +89,21 @@ class GamePlayerWinner extends connect(store)(LitElement) {
     `;
   }
 
+  _renderSelectedCard() {
+    const { _selectedCard, _playedCards } = this;
+
+    return html`
+      <div class="selected-card">
+        <game-card
+          .card="${_playedCards.find(card => card.id === _selectedCard)}"
+        ></game-card>
+      </div>
+    `;
+  }
+
   _renderCardList() {
-<<<<<<< HEAD
     const { _playedCards, _cardSelected, _hasSelectedCard } = this;
     const shuffledCards = shuffle(_playedCards);
-=======
-    const { _playedCards, _cardSelected } = this;
->>>>>>> parent of a76f53d... Show  czar which card they selected
 
     return html`
       <h1>Pick a winner.</h1>
@@ -101,7 +113,7 @@ class GamePlayerWinner extends connect(store)(LitElement) {
             html`
               <game-card
                 @card-selected="${_cardSelected}"
-                .selectable="${true}"
+                .selectable="${!_hasSelectedCard}"
                 .card="${card}"
               ></game-card>
             `
@@ -112,10 +124,14 @@ class GamePlayerWinner extends connect(store)(LitElement) {
 
   _cardSelected(event) {
     const { _gameCode } = this;
-    socket.emit("winner-selected", { 
-      cardId: event.detail.id, 
-      gameCode: _gameCode 
+    const cardId = event.detail.id;
+
+    socket.emit("winner-selected", {
+      cardId,
+      gameCode: _gameCode
     });
+    
+    this._selectedCard = cardId;
   }
 
   stateChanged({ game }) {
