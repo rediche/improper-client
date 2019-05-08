@@ -1,6 +1,5 @@
 import { LitElement, html, css } from 'lit-element';
 import { connect } from 'pwa-helpers/connect-mixin.js';
-import { PageViewElement } from './page-view-element.js';
 
 // This element is connected to the Redux store.
 import { store } from "../store.js";
@@ -28,10 +27,7 @@ class GamePlayer extends connect(store)(LitElement) {
   }
 
   static get styles() {
-    return [
-      SharedStyles,
-      css``
-    ];
+    return [];
   }
 
   render() {

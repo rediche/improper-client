@@ -1,10 +1,16 @@
-import { saveGameInfo, getGameInfo } from './utils';
+import { saveGameInfo, getGameInfo } from "./utils";
 
 // Load redux store
 import { store } from "./store.js";
 
 // These are the actions needed by this element.
-import { navigateToGame, navigate } from "./actions/app.js";
+import {
+  navigateToGame,
+  navigate,
+  navigateToUrl,
+  addErrorMessage,
+  preventNavigateToGame
+} from "./actions/app.js";
 
 import {
   updateGameState,
@@ -20,25 +26,22 @@ import {
   updateGamePlayerCount
 } from "./actions/game.js";
 
-import {
-  addErrorMessage
-} from "./actions/app.js";
-
 import { GAME_STATES, PLAYER_TYPES } from "./reducers/game.js";
 
 // REPORT: Talk about netlify injects
 // REPORT: Talk about only using websockets to avoid longpolling
-export const socket = io(window.improperBackendUrl || '127.0.0.1:3000', { transports: [ 'websocket' ] });
+export const socket = io(window.improperBackendUrl || "127.0.0.1:3000", {
+  transports: ["websocket"]
+});
 
-socket.on('game-created', ({ code }) => {
+socket.on("game-created", ({ code }) => {
   store.dispatch(updatePlayerType(PLAYER_TYPES.HOST));
   store.dispatch(navigateToGame(code));
 });
 
 export const gameJoined = ({ gameCode, playerId }) => {
-  store.dispatch(navigateToGame(gameCode)); 
+  store.dispatch(navigateToGame(gameCode));
   saveGameInfo({ gameCode: gameCode, playerId });
-  console.log(playerId);
 };
 
 socket.on("player-connected", ({ playerCount }) => {
@@ -80,7 +83,7 @@ socket.on("winner-found", ({ card }) => {
 
 socket.on("game-ended", ({ winner = null, wins = null } = {}) => {
   store.dispatch(updateGameState(GAME_STATES.GAME_OVER));
-  
+
   if (winner && wins) {
     store.dispatch(updateGameWinner({ id: winner, wins }));
   }
@@ -89,3 +92,16 @@ socket.on("game-ended", ({ winner = null, wins = null } = {}) => {
 socket.on("error-message", ({ errorMessage }) => {
   store.dispatch(addErrorMessage(errorMessage));
 });
+
+export const attemptReconnectToGame = () => {
+  if (getGameInfo()) {
+    socket.emit("reconnect-game", getGameInfo(), ({ reconnected }) => {
+      if (!reconnected) {
+        preventNavigateToGame();
+        return;
+      }
+
+      store.dispatch(navigateToGame(getGameInfo().gameCode));
+    });
+  }
+};

@@ -1,4 +1,7 @@
 import { updateGameCode } from "./game.js";
+import { attemptReconnectToGame } from "../socket";
+import { saveGameInfo, getGameInfo } from '../utils';
+import { store } from '../store';
 
 export const UPDATE_PAGE = "UPDATE_PAGE";
 export const UPDATE_ERROR_MESSAGES = "UPDATE_ERROR_MESSAGES";
@@ -22,14 +25,25 @@ export const navigate = path => dispatch => {
   const splitPath = path.split("/");
 
   if (splitPath.length > 2 && splitPath[1] === "game") {
-    dispatch(addErrorMessage("You have to join a game, by entering its code."));
-    window.history.pushState({}, "", "/");
-    dispatch(navigate("/"));
-    return;
+    if (getGameInfo()) {
+      attemptReconnectToGame();
+      return;
+    } else {
+      preventNavigateToGame();
+      return;
+    }
   }
 
   dispatch(loadPage(page));
 };
+
+export const preventNavigateToGame = () => {
+  saveGameInfo(null);
+  store.dispatch(
+    addErrorMessage("You have to join a game, by entering its code.")
+  );
+  store.dispatch(navigateToUrl("/"));
+}
 
 const loadGameByCode = gameCode => dispatch => {
   import("../pages/page-game.js").then(module => {
