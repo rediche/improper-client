@@ -97,7 +97,7 @@ export const attemptReconnectToGame = () => {
   if (getGameInfo()) {
     socket.emit("reconnect-game", getGameInfo(), ({ reconnected }) => {
       if (!reconnected) {
-        preventNavigateToGame();
+        store.dispatch(preventNavigateToGame());
         return;
       }
 

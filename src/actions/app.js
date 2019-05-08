@@ -1,7 +1,6 @@
 import { updateGameCode } from "./game.js";
 import { attemptReconnectToGame } from "../socket";
 import { saveGameInfo, getGameInfo } from '../utils';
-import { store } from '../store';
 
 export const UPDATE_PAGE = "UPDATE_PAGE";
 export const UPDATE_ERROR_MESSAGES = "UPDATE_ERROR_MESSAGES";
@@ -37,12 +36,12 @@ export const navigate = path => dispatch => {
   dispatch(loadPage(page));
 };
 
-export const preventNavigateToGame = () => {
+export const preventNavigateToGame = () => dispatch => {
   saveGameInfo(null);
-  store.dispatch(
+  dispatch(
     addErrorMessage("You have to join a game, by entering its code.")
   );
-  store.dispatch(navigateToUrl("/"));
+  dispatch(navigateToUrl("/"));
 }
 
 const loadGameByCode = gameCode => dispatch => {
