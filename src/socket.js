@@ -1,3 +1,5 @@
+import { saveGameInfo, getGameInfo } from './utils';
+
 // Load redux store
 import { store } from "./store.js";
 
@@ -33,9 +35,11 @@ socket.on('game-created', ({ code }) => {
   store.dispatch(navigateToGame(code));
 });
 
-socket.on("game-joined", ({ code }) => {
-  store.dispatch(navigateToGame(code));
-});
+export const gameJoined = ({ gameCode, playerId }) => {
+  store.dispatch(navigateToGame(gameCode)); 
+  saveGameInfo({ gameCode: gameCode, playerId });
+  console.log(playerId);
+};
 
 socket.on("player-connected", ({ playerCount }) => {
   store.dispatch(updateGamePlayerCount(playerCount));

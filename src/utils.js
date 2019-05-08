@@ -12,3 +12,17 @@ export const shuffle = (a) => {
 
   return newArray;
 }
+
+export const getGameInfo = () => {
+  const gameInfoString = localStorage.getItem('game-info');
+
+  if (gameInfoString) {
+    return JSON.parse(gameInfoString);
+  }
+
+  return null;
+}
+
+export const saveGameInfo = (gameInfo) => {
+  localStorage.setItem('game-info', JSON.stringify(gameInfo));
+}
