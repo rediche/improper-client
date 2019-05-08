@@ -78,9 +78,12 @@ socket.on("winner-found", ({ card }) => {
   store.dispatch(updateGameRoundWinner(card));
 });
 
-socket.on("game-ended", ({ winner, wins }) => {
+socket.on("game-ended", ({ winner = null, wins = null } = {}) => {
   store.dispatch(updateGameState(GAME_STATES.GAME_OVER));
-  store.dispatch(updateGameWinner({ id: winner, wins }));
+  
+  if (winner && wins) {
+    store.dispatch(updateGameWinner({ id: winner, wins }));
+  }
 });
 
 socket.on("error-message", ({ errorMessage }) => {
