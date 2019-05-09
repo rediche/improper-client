@@ -1,11 +1,13 @@
 import {
   UPDATE_PAGE,
-  UPDATE_ERROR_MESSAGES
+  UPDATE_ERROR_MESSAGES,
+  UPDATE_NICKNAME
 } from '../actions/app.js';
 
 const INITIAL_STATE = {
   page: '',
-  errorMessages: []
+  errorMessages: [],
+  nickname: ''
 };
 
 const app = (state = INITIAL_STATE, action) => {
@@ -19,6 +21,11 @@ const app = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         errorMessages: action.errorMessages
+      };
+    case UPDATE_NICKNAME:
+      return {
+        ...state,
+        nickname: action.nickname
       };
     default:
       return state;

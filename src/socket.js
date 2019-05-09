@@ -9,7 +9,8 @@ import {
   navigate,
   navigateToUrl,
   addErrorMessage,
-  preventNavigateToGame
+  preventNavigateToGame,
+  updateNickname
 } from "./actions/app.js";
 
 import {
@@ -39,9 +40,10 @@ socket.on("game-created", ({ code }) => {
   store.dispatch(navigateToGame(code));
 });
 
-export const gameJoined = ({ gameCode, playerId }) => {
+export const gameJoined = ({ gameCode, playerId, nickname }) => {
   store.dispatch(navigateToGame(gameCode));
-  saveGameInfo({ gameCode: gameCode, playerId });
+  store.dispatch(updateNickname(nickname));
+  saveGameInfo({ gameCode, playerId, nickname });
 };
 
 socket.on("player-connected", ({ playerCount }) => {

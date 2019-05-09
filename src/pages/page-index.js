@@ -12,13 +12,15 @@ import { ButtonSharedStyles } from "../styles/button-shared-styles.js";
 class PageIndex extends PageViewElement {
   static get properties() {
     return {
-      _gameCode: { type: String }
+      _gameCode: { type: String },
+      _nickname: { type: String }
     };
   }
 
   constructor() {
     super();
     this._gameCode = "";
+    this._nickname = "";
   }
 
   static get styles() {
@@ -79,7 +81,15 @@ class PageIndex extends PageViewElement {
   }
 
   render() {
-    const { _gameCode, _joinGame, _changeGameCode, _createGame, _keyup } = this;
+    const {
+      _gameCode,
+      _nickname,
+      _joinGame,
+      _changeGameCode,
+      _changeNickname,
+      _createGame,
+      _keyup
+    } = this;
 
     return html`
       <div class="wrapper">
@@ -94,6 +104,13 @@ class PageIndex extends PageViewElement {
             value="${_gameCode}" 
             @input="${_changeGameCode}" 
             @keyup="${_keyup}">
+          <input
+            type="text"
+            maxlength="20"
+            placeholder="Nickname (optional)"
+            aria-label="Nickname (optional)"
+            value="${_nickname}"
+            @input="${_changeNickname}">
           <button type="button" ?disabled="${_gameCode.length !==
             6}" @click="${_joinGame}">Join game</a>
           <button type="button" class="transparent" @click="${_createGame}">Create a new game</button>
@@ -105,10 +122,10 @@ class PageIndex extends PageViewElement {
   }
 
   _keyup(e) {
-    const { _gameCode } = this;
+    const { _gameCode, _nickname } = this;
 
     if (_gameCode.length === 6 && e.key === "Enter") {
-      socket.emit("join-game", { code: _gameCode.toUpperCase() });
+      socket.emit("join-game", { code: _gameCode.toUpperCase(), nickname: _nickname }, gameJoined);
     }
   }
 
@@ -116,9 +133,13 @@ class PageIndex extends PageViewElement {
     this._gameCode = e.target.value;
   }
 
+  _changeNickname(e) {
+    this._nickname = e.target.value;
+  }
+
   _joinGame() {
-    const { _gameCode } = this;
-    socket.emit("join-game", { code: _gameCode.toUpperCase() }, gameJoined);
+    const { _gameCode, _nickname } = this;
+    socket.emit("join-game", { code: _gameCode.toUpperCase(), nickname: _nickname }, gameJoined);
   }
 
   _createGame() {

@@ -4,6 +4,7 @@ import { saveGameInfo, getGameInfo } from '../utils';
 
 export const UPDATE_PAGE = "UPDATE_PAGE";
 export const UPDATE_ERROR_MESSAGES = "UPDATE_ERROR_MESSAGES";
+export const UPDATE_NICKNAME = "UPDATE_NICKNAME";
 
 export const navigateToUrl = path => dispatch => {
   window.history.pushState({}, "", path);
@@ -96,4 +97,11 @@ export const removeOldestErrorMessage = () => (dispatch, getState) => {
       )
     );
   }, 500);
+};
+
+export const updateNickname = nickname => {
+  return {
+    type: UPDATE_NICKNAME,
+    nickname
+  };
 };
