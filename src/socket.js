@@ -78,9 +78,8 @@ socket.on("find-winner", ({ playedCards }) => {
   store.dispatch(updateGameState(GAME_STATES.CHOOSE_WINNER));
 });
 
-socket.on("winner-found", ({ card }) => {
-  console.log("Winner found", card);
-  store.dispatch(updateGameRoundWinner(card));
+socket.on("winner-found", ({ card, nickname }) => {
+  store.dispatch(updateGameRoundWinner({ card, nickname }));
 });
 
 socket.on("game-ended", ({ winner = null, wins = null } = {}) => {

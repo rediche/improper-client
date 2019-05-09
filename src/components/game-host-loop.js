@@ -117,8 +117,8 @@ class GameHostLoop extends connect(store)(LitElement) {
 
     return html`
       <div class="winning-card">
-        <h1>Winner of the round.</h1>
-        <game-card .card="${_roundWinner}"></game-card>
+        <h1>${_roundWinner.nickname} wins the round.</h1>
+        <game-card .card="${_roundWinner.card}"></game-card>
       </div>
     `;
   }
