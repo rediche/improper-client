@@ -35,10 +35,10 @@ export const socket = io(window.improperBackendUrl || "127.0.0.1:3000", {
   transports: ["websocket"]
 });
 
-socket.on("game-created", ({ code }) => {
+export const gameCreated = ({ code }) => {
   store.dispatch(updatePlayerType(PLAYER_TYPES.HOST));
   store.dispatch(navigateToGame(code));
-});
+};
 
 export const gameJoined = ({ gameCode, playerId, nickname }) => {
   store.dispatch(navigateToGame(gameCode));

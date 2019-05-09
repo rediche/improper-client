@@ -2,7 +2,7 @@ import { html, css } from "lit-element";
 import { PageViewElement } from "../components/page-view-element.js";
 
 // Load up socket.io
-import { socket, gameJoined } from "../socket.js";
+import { socket, gameJoined, gameCreated } from "../socket.js";
 
 // These are the shared styles needed by this element.
 import { SharedStyles } from "../styles/shared-styles.js";
@@ -143,7 +143,7 @@ class PageIndex extends PageViewElement {
   }
 
   _createGame() {
-    socket.emit("create-game");
+    socket.emit("create-game", {}, gameCreated);
   }
 }
 
