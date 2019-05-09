@@ -21,7 +21,7 @@ class GameOver extends connect(store)(LitElement) {
 
   constructor() {
     super();
-    this._id = null;
+    this._nickname = null;
     this._wins = null;
   }
 
@@ -60,11 +60,11 @@ class GameOver extends connect(store)(LitElement) {
   }
 
   render() {
-    const { _id, _wins, _restartGame } = this;
+    const { _nickname, _wins, _restartGame } = this;
 
     return html`
       <div class="full-height">
-        <h1>Player ${_id} wins with ${_wins} points.</h1>
+        <h1>${_nickname} wins with ${_wins} points.</h1>
         <p>Game Over</p>
         <button @click="${_restartGame}">Start or join a new game</button>
       </div>
@@ -76,7 +76,7 @@ class GameOver extends connect(store)(LitElement) {
   }
 
   stateChanged({ game }) {
-    this._id = game.winner.id;
+    this._nickname = game.winner.nickname;
     this._wins = game.winner.wins;
   }
 }
