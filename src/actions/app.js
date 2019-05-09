@@ -24,12 +24,13 @@ export const navigate = path => dispatch => {
   // Dynamic routing logic for game route.
   const splitPath = path.split("/");
 
+  
   if (splitPath.length > 2 && splitPath[1] === "game") {
     if (getGameInfo()) {
       attemptReconnectToGame();
       return;
     } else {
-      preventNavigateToGame();
+      dispatch(preventNavigateToGame());
       return;
     }
   }
@@ -38,6 +39,7 @@ export const navigate = path => dispatch => {
 };
 
 export const preventNavigateToGame = () => dispatch => {
+  console.log("Test");
   saveGameInfo(null);
   dispatch(
     addErrorMessage("You have to join a game, by entering its code.")
