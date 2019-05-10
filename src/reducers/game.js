@@ -14,13 +14,11 @@ import {
   RESET_GAME_INITIAL_STATE
 } from '../actions/game.js';
 
-// REPORT: Talk about using objects with strings to make sure everything is typed correctly.
 export const PLAYER_TYPES = {
   HOST: 'HOST',
   PLAYER: 'PLAYER'
 };
 
-// REPORT: Talk about different states of the game.
 export const GAME_STATES = {
   STARTING: 'STARTING',
   PICKING_CARDS: 'PICKING_CARDS', // This is the core game loop.

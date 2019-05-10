@@ -29,8 +29,6 @@ import {
 
 import { GAME_STATES, PLAYER_TYPES } from "./reducers/game.js";
 
-// REPORT: Talk about netlify injects
-// REPORT: Talk about only using websockets to avoid longpolling
 export const socket = io(window.improperBackendUrl || "127.0.0.1:3000", {
   transports: ["websocket"]
 });

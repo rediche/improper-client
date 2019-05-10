@@ -7,7 +7,6 @@ import { removeOldestErrorMessage } from '../actions/app.js';
 
 import './snack-bar.js';
 
-// REPORT: Talk about error messages and how they are handled
 class ErrorMessages extends connect(store)(LitElement) {
   static get properties() {
     return {
