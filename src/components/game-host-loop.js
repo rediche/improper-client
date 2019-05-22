@@ -51,14 +51,39 @@ class GameHostLoop extends connect(store)(LitElement) {
           left: 0;
           width: 100%;
           height: 100%;
-          background-color: rgba(0,0,0,.5);
+          background-color: rgba(0,0,0,0);
           display: flex;
           align-items: center;
           justify-content: center;
           flex-direction: column;
           z-index: 1;
+          transition: .2s ease-in-out;
+          pointer-events: none;
+        }
+        
+        .show {
+          background-color: rgba(0,0,0,.5);
         }
 
+        .winning-card game-card {
+          transition: inherit;
+          transform: translateY(-20px);
+          opacity: 0;
+        }
+        
+        .winning-card.show game-card {
+          transform: translateY(0);
+          opacity: 1;
+        }
+        
+        .winning-card h1 {
+          opacity: 0;
+        }
+        
+        .winning-card.show h1 {
+          opacity: 1;
+        }
+        
         h1 {
           margin-bottom: 24px;
           color: #ffffff;
@@ -100,7 +125,7 @@ class GameHostLoop extends connect(store)(LitElement) {
 
     return html`
       <div class="layout">
-        ${ _roundWinner ? this._renderWinnerCard() : "" }
+        ${ this._renderWinnerCard() }
 
         <div class="left">
           <game-card type="black" .card="${_blackCard}"></game-card>
@@ -116,9 +141,9 @@ class GameHostLoop extends connect(store)(LitElement) {
     const { _roundWinner } = this;
 
     return html`
-      <div class="winning-card">
-        <h1>${_roundWinner.nickname} wins the round.</h1>
-        <game-card .card="${_roundWinner.card}"></game-card>
+      <div class="${_roundWinner ? `winning-card show` : `winning-card`}">
+        <h1>${_roundWinner ? _roundWinner.nickname : ""} wins the round.</h1>
+        <game-card .card="${_roundWinner ? _roundWinner.card : null}"></game-card>
       </div>
     `;
   }

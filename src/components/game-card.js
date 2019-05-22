@@ -77,7 +77,7 @@ class GameCard extends LitElement {
       <div class="ratio">
         <div class="content">
           <div class="padding">
-            <p>${card.text}</p>
+            <p>${card ? card.text : ""}</p>
           </div>
 
           ${ selectable ? html`<button type="button" @click="${this._selectCard}">Pick card</button>` : '' }
