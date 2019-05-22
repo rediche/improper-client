@@ -39,7 +39,6 @@ export const navigate = path => dispatch => {
 };
 
 export const preventNavigateToGame = () => dispatch => {
-  console.log("Test");
   saveGameInfo(null);
   dispatch(
     addErrorMessage("You have to join a game, by entering its code.")
