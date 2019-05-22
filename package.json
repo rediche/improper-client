@@ -1,11 +1,11 @@
 {
-  "name": "pwa-starter-kit",
-  "version": "0.9.0",
+  "name": "improper-client",
+  "version": "1.0.0",
   "contributors": [
-    "The Polymer Authors"
+    "The Polymer Authors",
+    "Rediche"
   ],
-  "license": "BSD-3-Clause",
-  "repository": "Polymer/pwa-starter-kit",
+  "repository": "rediche/improper-client",
   "scripts": {
     "start": "polymer serve",
     "build": "polymer build --auto-base-path && gulp prpl-server",
