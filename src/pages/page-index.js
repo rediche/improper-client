@@ -125,7 +125,7 @@ class PageIndex extends PageViewElement {
     const { _gameCode, _nickname } = this;
 
     if (_gameCode.length === 6 && e.key === "Enter") {
-      socket.emit("join-game", { code: _gameCode.toUpperCase(), nickname: _nickname }, gameJoined);
+      this._joinGame();
     }
   }
 
