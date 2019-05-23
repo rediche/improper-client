@@ -44,13 +44,16 @@ export const gameJoined = ({ gameCode, playerId, nickname }) => {
   saveGameInfo({ gameCode, playerId, nickname });
 };
 
+export const gameStarted = () => {
+  store.dispatch(updateGameState(GAME_STATES.PICKING_CARDS));
+};
+
+socket.on("game-started", gameStarted);
+
 socket.on("player-connected", ({ playerCount }) => {
   store.dispatch(updateGamePlayerCount(playerCount));
 });
 
-socket.on("game-started", () => {
-  store.dispatch(updateGameState(GAME_STATES.PICKING_CARDS));
-});
 
 socket.on("new-round-host", ({ blackCard }) => {
   store.dispatch(resetRoundState());

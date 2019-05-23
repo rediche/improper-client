@@ -11,6 +11,8 @@ import { socket } from "../socket.js";
 import { SharedStyles } from '../styles/shared-styles.js';
 import { ButtonSharedStyles } from '../styles/button-shared-styles.js';
 
+import { gameStarted } from '../socket';
+
 class GameHostStarting extends connect(store)(LitElement) {
   static get properties() {
     return {
@@ -74,8 +76,7 @@ class GameHostStarting extends connect(store)(LitElement) {
   }
 
   _startGame() {
-    // TODO: Should we emit the game code here?
-    socket.emit('start-game');
+    socket.emit('start-game', {}, gameStarted);
   }
 
   stateChanged({ game }) {
