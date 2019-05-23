@@ -80,6 +80,12 @@ class PageIndex extends PageViewElement {
     ];
   }
 
+  updated(changedProperties) {
+    if (changedProperties.has("active")) {
+      this._gameCode = "";
+    }
+  }
+
   render() {
     const {
       _gameCode,
@@ -101,7 +107,7 @@ class PageIndex extends PageViewElement {
             maxlength="6" 
             placeholder="Enter game code" 
             aria-label="Enter game code" 
-            value="${_gameCode}" 
+            .value="${_gameCode}" 
             @input="${_changeGameCode}" 
             @keyup="${_keyup}">
           <input
@@ -109,7 +115,7 @@ class PageIndex extends PageViewElement {
             maxlength="20"
             placeholder="Nickname (optional)"
             aria-label="Nickname (optional)"
-            value="${_nickname}"
+            .value="${_nickname}"
             @input="${_changeNickname}">
           <button type="button" ?disabled="${_gameCode.length !==
             6}" @click="${_joinGame}">Join game</a>
