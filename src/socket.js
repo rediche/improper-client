@@ -54,7 +54,6 @@ socket.on("player-connected", ({ playerCount }) => {
   store.dispatch(updateGamePlayerCount(playerCount));
 });
 
-
 socket.on("new-round-host", ({ blackCard }) => {
   store.dispatch(resetRoundState());
   store.dispatch(updateGameBlackCard(blackCard));
@@ -70,9 +69,9 @@ socket.on("card-played-host", ({ playedCards }) => {
   store.dispatch(updateGamePlayedCards(playedCards));
 });
 
-socket.on("card-played", ({ id }) => {
+export const cardPlayed = ({ id }) => {
   store.dispatch(updateGameSelectedCard(id));
-});
+};
 
 socket.on("find-winner", ({ playedCards }) => {
   store.dispatch(updateGamePlayedCards(playedCards));
