@@ -7,7 +7,7 @@ import { store } from "../store.js";
 
 import { GAME_STATES } from '../reducers/game.js';
 
-import { socket } from '../socket.js';
+import { socket, gameEnded } from '../socket.js';
 
 // These are the shared styles needed by this element.
 import { SharedStyles } from '../styles/shared-styles.js';
@@ -47,7 +47,7 @@ class EndGame extends connect(store)(LitElement) {
 
   _endGame() {
     const { _gameCode } = this;
-    socket.emit('end-game', { gameCode: _gameCode });
+    socket.emit('end-game', { gameCode: _gameCode }, gameEnded);
   }
 
   stateChanged({ game }) {

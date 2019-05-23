@@ -82,13 +82,15 @@ socket.on("winner-found", ({ card, nickname }) => {
   store.dispatch(updateGameRoundWinner({ card, nickname }));
 });
 
-socket.on("game-ended", ({ nickname = "", wins = null } = {}) => {
+export const gameEnded = ({ nickname = "", wins = null } = {}) => {
   store.dispatch(updateGameState(GAME_STATES.GAME_OVER));
-
+  
   if (nickname && wins) {
     store.dispatch(updateGameWinner({ nickname, wins }));
   }
-});
+};
+
+socket.on("game-ended", gameEnded);
 
 socket.on("error-message", ({ errorMessage }) => {
   store.dispatch(addErrorMessage(errorMessage));
