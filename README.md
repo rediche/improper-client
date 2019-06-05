@@ -15,15 +15,3 @@
 ## Build
 
 `npm run build:static`
-
-## Tests
-
-`npm run test`
-
-### Unit
-
-`npm run test:unit`
-
-### Integration
-
-`npm run test:integration`
